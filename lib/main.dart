@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(ClearNursing());
 
@@ -8,10 +9,12 @@ class ClearNursing extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: Colors.white,
           accentColor: Colors.black,
           errorColor: Colors.red[800],
+          highlightColor: Color(0xFFFF4F79),
           accentColorBrightness: Brightness.dark),
       home: MyHomePage(title: 'Clear Nursing'),
     );
@@ -51,6 +54,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+  Text(
+    'Index 0: LEARN',
+  ),
+  Text(
+     'Index 1: PRACTICE',
+  ),
+  Text(
+     'Index 2: MORE',
+  ),
+];
+  void _onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+  });
+}
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -62,42 +82,41 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title,
+        style: GoogleFonts.roboto(
+          fontSize: 25.0,
+          fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child:_widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButton: FloatingActionButton(
+      bottomNavigationBar: BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.school),
+          title: Text('Learn'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.list),
+          title: Text('Practice'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.more_vert),
+          title: Text('More'),
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Theme.of(context).highlightColor,
+      onTap: _onItemTapped,
+    ),
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        label: Text('Take a Test'),
+        icon: Icon(Icons.dvr),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
