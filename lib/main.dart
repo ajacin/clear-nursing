@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:clearnursing/screens/pages/home.dart';
+import 'package:clearnursing/screens/pages/HomePage.dart';
 
 void main() => runApp(ClearNursing());
 
@@ -17,7 +17,7 @@ class ClearNursing extends StatelessWidget {
           errorColor: Colors.red[800],
           highlightColor: Color(0xFFFF4F79),
           accentColorBrightness: Brightness.dark),
-      home: HomeScreen(title: 'Clear Nursing'),
+      home: HomePage(title: 'Clear Nursing'),
     );
   }
 }
