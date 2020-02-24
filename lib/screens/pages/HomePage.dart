@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage>
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
   Text(
-    'Index 0: LEARN1',
+     'Index 1: learn',
   ),
   Text(
      'Index 1: PRACTICE',
