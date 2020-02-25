@@ -19,13 +19,13 @@ class FirstScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              // CircleAvatar(
-              //   backgroundImage: NetworkImage(
-              //     imageUrl,
-              //   ),
-              //   radius: 60,
-              //   backgroundColor: Colors.transparent,
-              // ),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
+              ),
               SizedBox(height: 40),
               Text(
                 'NAME',

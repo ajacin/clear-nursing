@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/FIrstScreen.dart';
+import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return FirstScreen();
+                return HomePage(title:"Clear Nursing");
               },
             ),
           );

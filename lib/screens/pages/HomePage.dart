@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:clearnursing/screens/pages/LoginPage.dart';
+import 'package:clearnursing/screens/pages/SIgnIn.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -34,7 +36,13 @@ class _HomePageState extends State<HomePage>
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         titleSpacing: 0.0,
-        leading: Icon(Icons.local_hospital),
+        leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 5,
+                backgroundColor: Colors.transparent,
+              ),
         title: Text(widget.title,
         style: GoogleFonts.roboto(
           fontSize: 25.0,
