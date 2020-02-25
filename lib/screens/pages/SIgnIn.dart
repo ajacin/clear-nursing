@@ -20,6 +20,7 @@ print('-------->0');
 print('-------->1');
   final AuthResult authResult = await _auth.signInWithCredential(credential);
   final FirebaseUser user = authResult.user;
+  print(authResult.user);
 print('-------->2');
   // Checking if email and name is null
   assert(user.email != null);
