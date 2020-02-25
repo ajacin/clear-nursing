@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:clearnursing/screens/pages/LoginPage.dart';
+import 'package:clearnursing/screens/pages/FirstScreen.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 
 class HomePage extends StatefulWidget {
