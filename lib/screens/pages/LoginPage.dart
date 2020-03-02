@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/FIrstScreen.dart';
 import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
+          saveSharedPref();
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
@@ -48,7 +50,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
+  Future<bool> saveSharedPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString('user', name);
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
