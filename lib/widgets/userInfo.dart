@@ -3,6 +3,8 @@ import 'package:clearnursing/screens/pages/FIrstScreen.dart';
 import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class UserInfo extends StatefulWidget {
   @override
@@ -50,6 +52,7 @@ class _UserInfoState extends State<UserInfo> {
   //     ),
   //   );
   // }
+  bool isSwitched = true;
 
   Future<bool> saveSharedPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -59,7 +62,7 @@ class _UserInfoState extends State<UserInfo> {
   Future<String> loadData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString("name");
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +74,15 @@ class _UserInfoState extends State<UserInfo> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text(
+                'Profile',
+                style: GoogleFonts.roboto(fontSize: 40.0, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                name,
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(height: 20),
               CircleAvatar(
                 backgroundImage: NetworkImage(
                   imageUrl,
@@ -78,53 +90,74 @@ class _UserInfoState extends State<UserInfo> {
                 radius: 40,
                 backgroundColor: Colors.transparent,
               ),
-              SizedBox(height: 50),
-              Text(name),
+              SizedBox(height: 40),
               Card(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Column(
-                    children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(top: 15,bottom: 5),
-                      child: Text('Current Score',
-                      style: TextStyle(
-                        color: Colors.black54
-                      ),),
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(top: 15, bottom: 5),
+                          child: Text(
+                            'Current Score',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: Text(
+                            "No scores",
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 16),
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 15),
-                      child: Text("332",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 16
-                      ),),
-                    )
-                  ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(top: 15,bottom: 5),
-                      child: Text('Current Score',
-                      style: TextStyle(
-                        color: Colors.black54
-                      ),),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(top: 15, bottom: 5),
+                          child: Text(
+                            'Current Score',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: Text(
+                            "No scores",
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 16),
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 15),
-                      child: Text("332",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 16
-                      ),),
-                    )
-                  ],
-                  ),
                   ],
                 ),
-              )
+              ),
+              Card(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[Icon(Icons.settings), Icon(Icons.power)],
+              )),
+              Card(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text("Show notifications"),
+                  Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                    activeTrackColor: Colors.black12,
+                    activeColor: Colors.black,
+                  ),
+                ],
+              )),
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:clearnursing/screens/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clearnursing/screens/pages/HomePage.dart';
+import 'package:clearnursing/screens/pages/SplashPage.dart';
 
 void main() => runApp(ClearNursing());
 
@@ -18,7 +19,13 @@ class ClearNursing extends StatelessWidget {
           errorColor: Colors.red[800],
           highlightColor: Color(0xFFFF4F79),
           accentColorBrightness: Brightness.dark),
-      home: LoginPage(),
+      home: SplashPage(),
+      routes: <String, WidgetBuilder>{
+        // '/task': (BuildContext context) => TaskPage(title: 'Task'),
+        '/home': (BuildContext context) => HomePage(title: 'Home'),
+        '/login': (BuildContext context) => LoginPage(),
+        // '/register': (BuildContext context) => RegisterPage(),
+      }
     );
   }
 }
