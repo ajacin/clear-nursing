@@ -27,6 +27,8 @@ dependencies:
   firebase_auth:
   google_sign_in:
   shared_preferences:
+  awesome_loader:
+  http:
 
 dev_dependencies:
   flutter_test:
