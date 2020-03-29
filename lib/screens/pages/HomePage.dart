@@ -80,10 +80,10 @@ class _HomePageState extends State<HomePage>
         selectedItemColor: Theme.of(context).highlightColor,
         onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('Take a Test'),
-        icon: Icon(Icons.dvr),
-      ), // This traili
+      // floatingActionButton: FloatingActionButton.extended(
+      //   label: Text('Take a Test'),
+      //   icon: Icon(Icons.dvr),
+      // ), // This traili
     );
   }
 }
