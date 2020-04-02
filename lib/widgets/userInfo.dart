@@ -4,6 +4,7 @@ import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:clearnursing/screens/pages/LoginPage.dart';
 
 
 class UserInfo extends StatefulWidget {
@@ -79,7 +80,7 @@ class _UserInfoState extends State<UserInfo> {
                 style: GoogleFonts.roboto(fontSize: 40.0, fontWeight: FontWeight.bold),
               ),
               Text(
-                name,
+                "ajacin",
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: 20),
@@ -158,6 +159,24 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                 ],
               )),
+              SizedBox(height: 40),
+              RaisedButton(
+                onPressed: () {
+                  signOutGoogle();
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                },
+                color: Colors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                ),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+              )
             ],
           ),
         ),

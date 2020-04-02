@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
+          print('completed signIn');
           saveSharedPref();
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -52,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   Future<bool> saveSharedPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('imageUrl', imageUrl);
     return await preferences.setString('user', name);
 }
   @override

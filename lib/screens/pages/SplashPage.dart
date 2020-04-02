@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:clearnursing/screens/pages/SIgnIn.dart';
 
 
 class SplashPage extends StatefulWidget {
@@ -17,10 +18,16 @@ class _SplashPageState extends State<SplashPage> {
   initState() {
     Future<String> currentUser() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString("name");
+    print("pullign pref------------->");
+    print(preferences.getString("user"));
+    imageUrl = preferences.getString("imageUrl");
+    return preferences.getString("user");
+    // return null;
   }
         currentUser()
         .then((result) => {
+          print('result to be printed'),
+          print(result),
               if (result == null)
                 {Navigator.pushReplacementNamed(context, "/login")}
               // else{
@@ -29,6 +36,7 @@ class _SplashPageState extends State<SplashPage> {
               else
                 {
                   print("user logged "+result),
+                  name = result,
                   Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

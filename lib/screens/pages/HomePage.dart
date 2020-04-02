@@ -10,7 +10,6 @@ import 'package:clearnursing/widgets/practiceMain.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
-  String _user;
 
   Future<String> loadSharedPrefData(key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -24,10 +23,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
-  
   static List<Widget> _widgetOptions = <Widget>[
     Text(
-      name,
+      name
     ),
     practiceMain(),
     UserInfo()
