@@ -24,9 +24,9 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      name
-    ),
+    // Text(
+    //   name
+    // ),
     practiceMain(),
     UserInfo()
   ];
@@ -61,13 +61,13 @@ class _HomePageState extends State<HomePage>
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.school),
+          //   title: Text('Learn'),
+          // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('Learn'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            title: Text('Practice'),
+            icon: Icon(Icons.question_answer),
+            title: Text('Questions'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

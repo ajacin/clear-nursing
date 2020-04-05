@@ -30,6 +30,7 @@ dependencies:
   awesome_loader:
   http:
   cloud_firestore:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
