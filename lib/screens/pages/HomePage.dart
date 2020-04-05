@@ -5,6 +5,7 @@ import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clearnursing/widgets/userInfo.dart';
 import 'package:clearnursing/widgets/practiceMain.dart';
+import 'package:clearnursing/widgets/Settings.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage>
     //   name
     // ),
     practiceMain(),
-    UserInfo()
+    Settings()
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage>
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text('More'),
+            title: Text('Profile'),
           ),
         ],
         currentIndex: _selectedIndex,
