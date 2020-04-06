@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 25,
                 ),
                 Text(
-                  'Sign in with Google',
+                  'Continue with Google',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.grey,
