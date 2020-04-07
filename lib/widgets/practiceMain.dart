@@ -12,6 +12,7 @@ import 'package:clearnursing/widgets/IconTextWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+  snapshot.shuffle();
   return ListView(
     padding: const EdgeInsets.only(top: 20.0),
     children: snapshot.map((data) => _buildListItem(context, data)).toList(),
@@ -20,6 +21,7 @@ Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
   final record = Record.fromSnapshot(data);
+  int serialNumber = record.hashCode;
 
   return Padding(
     key: ValueKey(record.question),
@@ -44,6 +46,13 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Row(
+              children: <Widget>[
+                Text(serialNumber.toString()),
+                Icon(Icons.bookmark_border,
+                color: Colors.blueAccent,),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(record.question),
