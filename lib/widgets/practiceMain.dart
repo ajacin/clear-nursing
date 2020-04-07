@@ -21,7 +21,6 @@ Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
   final record = Record.fromSnapshot(data);
-
   return Padding(
     key: ValueKey(record.question),
     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -47,7 +46,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(record.hashCode.toString()),
+                // Text(record.reference.toString(),
                 Icon(
                   Icons.bookmark_border,
                   color: Colors.blueAccent,
@@ -71,53 +70,61 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                         return AlertDialog(
                           title: Text(record.question),
                           actions: [
-                            FlatButton(
-                              child: Text("Close"),
+                            OutlineButton(
+                              child: Text(
+                                "Dismiss",
+                                style: TextStyle(
+                                    color: Colors.grey[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             )
                           ],
-                          content: Column(children: <Widget>[
-                            Card(
-                              color: record.answer == 1
-                                  ? Colors.green[100]
-                                  : Colors.redAccent[100],
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option1),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 2
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option2),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 3
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option3),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 4
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option4),
-                              ),
-                            ),
-                            SizedBox(height: 40),
-                            Text(record.remarks)
-                          ]),
+                          content: SingleChildScrollView(
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Card(
+                                    color: record.answer == 1
+                                        ? Colors.green[100]
+                                        : Colors.redAccent[100],
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option1),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 2
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option2),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 3
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option3),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 4
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option4),
+                                    ),
+                                  ),
+                                ]),
+                          ),
                         );
                       });
 
@@ -136,53 +143,61 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                         return AlertDialog(
                           title: Text(record.question),
                           actions: [
-                            FlatButton(
-                              child: Text("Close"),
+                            OutlineButton(
+                              child: Text(
+                                "Dismiss",
+                                style: TextStyle(
+                                    color: Colors.grey[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             )
                           ],
-                          content: Column(children: <Widget>[
-                            Card(
-                              color: record.answer == 1
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option1),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 2
-                                  ? Colors.green[100]
-                                  : Colors.redAccent[100],
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option2),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 3
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option3),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 4
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option4),
-                              ),
-                            ),
-                            SizedBox(height: 40),
-                            Text(record.remarks)
-                          ]),
+                          content: SingleChildScrollView(
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Card(
+                                    color: record.answer == 1
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option1),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 2
+                                        ? Colors.green[100]
+                                        : Colors.redAccent[100],
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option2),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 3
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option3),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 4
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option4),
+                                    ),
+                                  ),
+                                ]),
+                          ),
                         );
                       });
 
@@ -201,53 +216,61 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                         return AlertDialog(
                           title: Text(record.question),
                           actions: [
-                            FlatButton(
-                              child: Text("Close"),
+                            OutlineButton(
+                              child: Text(
+                                "Dismiss",
+                                style: TextStyle(
+                                    color: Colors.grey[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             )
                           ],
-                          content: Column(children: <Widget>[
-                            Card(
-                              color: record.answer == 1
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option1),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 2
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option2),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 3
-                                  ? Colors.green[100]
-                                  : Colors.redAccent[100],
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option3),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 4
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option4),
-                              ),
-                            ),
-                            SizedBox(height: 40),
-                            Text(record.remarks)
-                          ]),
+                          content: SingleChildScrollView(
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Card(
+                                    color: record.answer == 1
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option1),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 2
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option2),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 3
+                                        ? Colors.green[100]
+                                        : Colors.redAccent[100],
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option3),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 4
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option4),
+                                    ),
+                                  ),
+                                ]),
+                          ),
                         );
                       });
 
@@ -266,53 +289,61 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                         return AlertDialog(
                           title: Text(record.question),
                           actions: [
-                            FlatButton(
-                              child: Text("Close"),
+                            OutlineButton(
+                              child: Text(
+                                "Dismiss",
+                                style: TextStyle(
+                                    color: Colors.grey[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             )
                           ],
-                          content: Column(children: <Widget>[
-                            Card(
-                              color: record.answer == 1
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option1),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 2
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option2),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 3
-                                  ? Colors.green[100]
-                                  : Colors.white,
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option3),
-                              ),
-                            ),
-                            Card(
-                              color: record.answer == 4
-                                  ? Colors.green[100]
-                                  : Colors.redAccent[100],
-                              child: ListTile(
-                                leading: Icon(Icons.arrow_right),
-                                title: Text(record.option4),
-                              ),
-                            ),
-                            SizedBox(height: 40),
-                            Text(record.remarks)
-                          ]),
+                          content: SingleChildScrollView(
+                            child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Card(
+                                    color: record.answer == 1
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option1),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 2
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option2),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 3
+                                        ? Colors.green[100]
+                                        : Colors.white,
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option3),
+                                    ),
+                                  ),
+                                  Card(
+                                    color: record.answer == 4
+                                        ? Colors.green[100]
+                                        : Colors.redAccent[100],
+                                    child: ListTile(
+                                      leading: Icon(Icons.arrow_right),
+                                      title: Text(record.option4),
+                                    ),
+                                  ),
+                                ]),
+                          ),
                         );
                       });
 
