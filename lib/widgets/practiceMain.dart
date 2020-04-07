@@ -21,7 +21,6 @@ Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
   final record = Record.fromSnapshot(data);
-  int serialNumber = record.hashCode;
 
   return Padding(
     key: ValueKey(record.question),
@@ -48,9 +47,11 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(serialNumber.toString()),
-                Icon(Icons.bookmark_border,
-                color: Colors.blueAccent,),
+                Text(record.hashCode.toString()),
+                Icon(
+                  Icons.bookmark_border,
+                  color: Colors.blueAccent,
+                ),
               ],
             ),
             Padding(
@@ -81,7 +82,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                             Card(
                               color: record.answer == 1
                                   ? Colors.green[100]
-                                  : Colors.white,
+                                  : Colors.redAccent[100],
                               child: ListTile(
                                 leading: Icon(Icons.arrow_right),
                                 title: Text(record.option1),
@@ -155,7 +156,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                             Card(
                               color: record.answer == 2
                                   ? Colors.green[100]
-                                  : Colors.white,
+                                  : Colors.redAccent[100],
                               child: ListTile(
                                 leading: Icon(Icons.arrow_right),
                                 title: Text(record.option2),
@@ -229,7 +230,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                             Card(
                               color: record.answer == 3
                                   ? Colors.green[100]
-                                  : Colors.white,
+                                  : Colors.redAccent[100],
                               child: ListTile(
                                 leading: Icon(Icons.arrow_right),
                                 title: Text(record.option3),
@@ -303,7 +304,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                             Card(
                               color: record.answer == 4
                                   ? Colors.green[100]
-                                  : Colors.white,
+                                  : Colors.redAccent[100],
                               child: ListTile(
                                 leading: Icon(Icons.arrow_right),
                                 title: Text(record.option4),
