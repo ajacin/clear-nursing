@@ -48,18 +48,20 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
               children: <Widget>[
                 // Text(record.reference.toString(),
                 Icon(
-                  Icons.bookmark_border,
-                  color: Colors.blueAccent,
+                  Icons.local_hospital,
+                  color: Theme.of(context).highlightColor,
                 ),
               ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(record.question,
-              style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),),
+              child: Text(
+                record.question,
+                style: TextStyle(
+                    color: Colors.blue[800],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
             ),
             Card(
               key: ValueKey(record.question),
