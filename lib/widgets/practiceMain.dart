@@ -55,7 +55,11 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(record.question),
+              child: Text(record.question,
+              style: TextStyle(
+                                    color: Colors.blue[800],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),),
             ),
             Card(
               key: ValueKey(record.question),
