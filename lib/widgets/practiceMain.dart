@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
+import 'package:share/share.dart';
 
 Widget _buildList(
     BuildContext context, List<DocumentSnapshot> snapshot, int length) {
@@ -63,63 +64,12 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
               " Question " + widget.serial.toString(),
               style: TextStyle(fontSize: 10),
             ),
-            Container(
-              child: IconButton(
-                icon: Icon(Icons.content_copy),
-                color: Theme.of(context).highlightColor,
-                // size: 20,
-                onPressed: () {
-                  var textToCopy = widget.record.question +
-                      '\n' +
-                      '1) ' +
-                      widget.record.option1 +
-                      '\n' +
-                      '2) ' +
-                      widget.record.option2 +
-                      '\n' +
-                      '3) ' +
-                      widget.record.option3 +
-                      '\n' +
-                      '4) ' +
-                      widget.record.option4 +
-                      '\n';
-                  ClipboardManager.copyToClipBoard(textToCopy).then((result) {
-                    final snackBar = SnackBar(
-                      content: Text(
-                        'Copied to clipboard.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      duration: const Duration(seconds: 4),
-                      backgroundColor: Theme.of(context).highlightColor,
-                      action: SnackBarAction(
-                        label: 'COPY WITH ANSWER',
-                        onPressed: () {
-                          textToCopy = textToCopy +
-                              '\nAnswer: ' +
-                              widget.record.answer.toString();
-                          ClipboardManager.copyToClipBoard(textToCopy)
-                              .then((result) {
-                            final snackBar = SnackBar(
-                              content: Text(
-                                'Copied to clipboard with answer.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              duration: const Duration(seconds: 3),
-                              backgroundColor: Theme.of(context).highlightColor,
-                            );
-                            Scaffold.of(context).showSnackBar(snackBar);
-                          });
-                        },
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  });
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                CopyQuestionToClipBoard(widget: widget),
+                ShareQuestionToEnvironment(widget: widget)
+              ],
             ),
           ],
         ),
@@ -143,6 +93,139 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
         AnswerOptionContainer(record: widget.record, option: 4),
         const SizedBox(height: 20.0),
       ],
+    );
+  }
+}
+
+class ShareQuestionToEnvironment extends StatelessWidget {
+  const ShareQuestionToEnvironment({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final QuestionAnswer widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: IconButton(
+      icon: Icon(Icons.share),
+      color: Theme.of(context).highlightColor,
+      onPressed: () {
+        var textToCopy = widget.record.question +
+            '\n' +
+            '1) ' +
+            widget.record.option1 +
+            '\n' +
+            '2) ' +
+            widget.record.option2 +
+            '\n' +
+            '3) ' +
+            widget.record.option3 +
+            '\n' +
+            '4) ' +
+            widget.record.option4 +
+            '\n';
+         showDialog(
+           context: context,
+                            builder: (BuildContext context){
+                              return AlertDialog(
+            title: Text("Share this question"),
+            content: Text(
+                "Would you like to share this question with answer?"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Without Answer'),
+                onPressed: () {
+                  Share.share(textToCopy, subject: 'Question from Clear Nursing App');
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('With Answer'),
+                onPressed: () {
+                  textToCopy = textToCopy +
+                      '\nAnswer: ' +
+                      widget.record.answer.toString();
+                  Share.share(textToCopy, subject: 'Question from Clear Nursing App');
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+        );
+        }
+         );
+      },
+    ));
+  }
+}
+
+class CopyQuestionToClipBoard extends StatelessWidget {
+  const CopyQuestionToClipBoard({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final QuestionAnswer widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: IconButton(
+        icon: Icon(Icons.content_copy),
+        color: Theme.of(context).highlightColor,
+        // size: 20,
+        onPressed: () {
+          var textToCopy = widget.record.question +
+              '\n' +
+              '1) ' +
+              widget.record.option1 +
+              '\n' +
+              '2) ' +
+              widget.record.option2 +
+              '\n' +
+              '3) ' +
+              widget.record.option3 +
+              '\n' +
+              '4) ' +
+              widget.record.option4 +
+              '\n';
+          ClipboardManager.copyToClipBoard(textToCopy).then((result) {
+            final snackBar = SnackBar(
+              content: Text(
+                'Copied to clipboard.',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              duration: const Duration(seconds: 4),
+              backgroundColor: Theme.of(context).highlightColor,
+              action: SnackBarAction(
+                label: 'COPY WITH ANSWER',
+                onPressed: () {
+                  textToCopy = textToCopy +
+                      '\nAnswer: ' +
+                      widget.record.answer.toString();
+                  ClipboardManager.copyToClipBoard(textToCopy).then((result) {
+                    final snackBar = SnackBar(
+                      content: Text(
+                        'Copied to clipboard with answer.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Theme.of(context).highlightColor,
+                    );
+                    Scaffold.of(context).showSnackBar(snackBar);
+                  });
+                },
+              ),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          });
+        },
+      ),
     );
   }
 }

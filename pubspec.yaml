@@ -33,6 +33,7 @@ dependencies:
   path_provider:
   flutter_launcher_icons:
   clipboard_manager:
+  share:
 
 dev_dependencies:
   flutter_test:
