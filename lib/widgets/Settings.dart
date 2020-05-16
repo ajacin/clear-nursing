@@ -8,24 +8,24 @@ import 'package:clearnursing/screens/pages/LoginPage.dart';
 
 class Settings extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";
-  final TextStyle whiteText = TextStyle(
-    color: Colors.white,
-  );
-  final TextStyle greyTExt = TextStyle(
-    color: Colors.grey.shade400,
-  );
+  // final TextStyle whiteText = TextStyle(
+  //   color: Theme.of(context).primaryColor,
+  // );
+  // final TextStyle greyTExt = TextStyle(
+  //   color: Theme.of(context).accentColor,
+  // );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Theme(
         data: Theme.of(context).copyWith(
           brightness: Brightness.dark,
-          primaryColor: Colors.purple,
+          primaryColor: Theme.of(context).highlightColor,
         ),
         child: DefaultTextStyle(
           style: TextStyle(
-            color: Colors.white,
+            color: Theme.of(context).accentColor,
           ),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(32.0),
@@ -38,7 +38,7 @@ class Settings extends StatelessWidget {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).accentColor,
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -47,7 +47,7 @@ class Settings extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         border: Border.all(
-                          color: Colors.white,
+                          color: Theme.of(context).highlightColor,
                           width: 2.0,
                         ),
                       ),
@@ -60,9 +60,9 @@ class Settings extends StatelessWidget {
                           Text(
                             name,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: 30.0,
+                              fontSize: 20.0,
                             ),
                           ),
                         ],
@@ -72,14 +72,16 @@ class Settings extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 ListTile(
-                  title: Text("Languages"),
+                  title: Text("Theme"),
                   subtitle: Text(
-                    "English US",
-                    style: greyTExt,
+                    "System Default",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).accentColor,
                   ),
                   onTap: () {},
                 ),
@@ -87,11 +89,13 @@ class Settings extends StatelessWidget {
                   title: Text("Profile Settings"),
                   subtitle: Text(
                     name,
-                    style: greyTExt,
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).accentColor,
                   ),
                   onTap: () {},
                 ),
@@ -99,7 +103,9 @@ class Settings extends StatelessWidget {
                   title: Text("Email Notifications"),
                   subtitle: Text(
                     "On",
-                    style: greyTExt,
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                   value: true,
                   onChanged: (val) {},
@@ -108,7 +114,9 @@ class Settings extends StatelessWidget {
                   title: Text("Push Notifications"),
                   subtitle: Text(
                     "Off",
-                    style: greyTExt,
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                   value: false,
                   onChanged: (val) {},
@@ -117,7 +125,10 @@ class Settings extends StatelessWidget {
                   title: Text("Logout"),
                   onTap: () {
                     signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) {
+                      return LoginPage();
+                    }), ModalRoute.withName('/'));
                   },
                 ),
               ],

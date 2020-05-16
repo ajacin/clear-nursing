@@ -1,45 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:clearnursing/screens/pages/FIrstScreen.dart';
-import 'package:clearnursing/screens/pages/HomePage.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awesome_loader/awesome_loader.dart';
-import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:clearnursing/widgets/IconTextWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot, int length) {
   snapshot.shuffle();
+  print("Length is");
+  print(length);
+  int serial=1;
   return ListView(
     padding: const EdgeInsets.only(top: 20.0),
-    children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+    children: snapshot.map((data) => _buildListItem(context, data,length, serial++)).toList(),
   );
 }
 
-Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial) {
   final record = Record.fromSnapshot(data);
   return Padding(
     key: ValueKey(record.question),
-    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
     child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-          border: Border.all(color: Theme.of(context).accentColor),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0, // soften the shadow
-              spreadRadius: 2.0, //extend the shadow
-              offset: Offset(
-                2.0, // Move to right 10  horizontally
-                2.0, // Move to bottom 10 Vertically
-              ),
-            )
-          ],
-          borderRadius: BorderRadius.circular(5.0),
+          border: Border.all(color: Colors.grey[300]),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -48,41 +29,59 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
               children: <Widget>[
                 // Text(record.reference.toString(),
                 Icon(
-                  Icons.local_hospital,
+                  Icons.stop,
                   color: Theme.of(context).highlightColor,
                 ),
+                Text("Q "+serial.toString())
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                record.question,
-                style: TextStyle(
-                    color: Colors.blue[800],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text(
+                  record.question,
+                  style: TextStyle(
+                      color: Colors.blue[500],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ),
             ),
             Card(
+              color: Theme.of(context).primaryColor,
               key: ValueKey(record.question),
               child: ListTile(
-                leading: Icon(Icons.arrow_right),
-                title: Text(record.option1),
+                leading: Icon(Icons.trip_origin,),
+                title: Text(
+                  record.option1,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
                 onTap: () {
                   // record.reference.updateData({'remarks': "This remarks updated"});
+
                   return showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text(record.question),
+                          backgroundColor: Colors.white,
+                          title: Text(
+                            record.question,
+                            style: TextStyle(
+                                color: Colors.blue[500],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
                           actions: [
                             OutlineButton(
                               child: Text(
                                 "Dismiss",
                                 style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
+                                    color: Colors.black,
+                                    // fontWeight: FontWeight.bold,
+                                    fontSize: 10),
                               ),
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -94,39 +93,61 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Card(
-                                    color: record.answer == 1
-                                        ? Colors.green[100]
-                                        : Colors.redAccent[100],
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option1),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 1
+                                        ? Colors.green
+                                        : Colors.red
+                                      ),
+                                      title: Text(
+                                        record.option1,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 2
-                                        ? Colors.green[100]
-                                        : Colors.white,
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option2),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 2
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option2,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 3
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option3),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 3
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option3,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 4
-                                        ? Colors.green[100]
-                                        : Colors.white,
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option4),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 4
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option4,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ]),
@@ -139,9 +160,15 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
               ),
             ),
             Card(
+              color: Theme.of(context).primaryColor,
               child: ListTile(
-                leading: Icon(Icons.arrow_right),
-                title: Text(record.option2),
+                leading: Icon(Icons.trip_origin),
+                title: Text(
+                  record.option2,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
                 onTap: () {
                   return showDialog(
                       context: context,
@@ -153,7 +180,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                               child: Text(
                                 "Dismiss",
                                 style: TextStyle(
-                                    color: Colors.grey[800],
+                                    color: Theme.of(context).accentColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
@@ -167,39 +194,63 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Card(
-                                    color: record.answer == 1
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option1),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 1
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option1,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 2
-                                        ? Colors.green[100]
-                                        : Colors.redAccent[100],
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option2),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 2
+                                        ? Colors.green
+                                        : Colors.red),
+                                      title: Text(
+                                        record.option2,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 3
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option3),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 3
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option3,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 4
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option4),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 4
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option4,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ]),
@@ -212,9 +263,15 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
               ),
             ),
             Card(
+              color: Theme.of(context).primaryColor,
               child: ListTile(
-                leading: Icon(Icons.arrow_right),
-                title: Text(record.option3),
+                leading: Icon(Icons.trip_origin),
+                title: Text(
+                  record.option3,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
                 onTap: () {
                   return showDialog(
                       context: context,
@@ -226,7 +283,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                               child: Text(
                                 "Dismiss",
                                 style: TextStyle(
-                                    color: Colors.grey[800],
+                                    color: Theme.of(context).accentColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
@@ -240,39 +297,63 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Card(
-                                    color: record.answer == 1
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option1),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 1
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option1,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 2
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option2),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 2
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option2,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 3
-                                        ? Colors.green[100]
-                                        : Colors.redAccent[100],
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option3),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 3
+                                        ? Colors.green
+                                        : Colors.red),
+                                      title: Text(
+                                        record.option3,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 4
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option4),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 4
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option4,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ]),
@@ -285,9 +366,15 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
               ),
             ),
             Card(
+              color: Theme.of(context).primaryColor,
               child: ListTile(
-                leading: Icon(Icons.arrow_right),
-                title: Text(record.option4),
+                leading: Icon(Icons.trip_origin),
+                title: Text(
+                  record.option4,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
                 onTap: () {
                   return showDialog(
                       context: context,
@@ -299,7 +386,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                               child: Text(
                                 "Dismiss",
                                 style: TextStyle(
-                                    color: Colors.grey[800],
+                                    color: Theme.of(context).accentColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
@@ -313,39 +400,63 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Card(
-                                    color: record.answer == 1
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option1),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 1
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option1,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 2
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option2),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 2
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option2,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 3
-                                        ? Colors.green[100]
-                                        : Colors.white,
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option3),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 3
+                                        ? Colors.green
+                                        : Colors.grey,),
+                                      title: Text(
+                                        record.option3,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Card(
-                                    color: record.answer == 4
-                                        ? Colors.green[100]
-                                        : Colors.redAccent[100],
+                                    
                                     child: ListTile(
-                                      leading: Icon(Icons.arrow_right),
-                                      title: Text(record.option4),
+                                      leading: Icon(Icons.trip_origin,
+                                      color: record.answer == 4
+                                        ? Colors.green
+                                        : Colors.red),
+                                      title: Text(
+                                        record.option4,
+                                        style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ]),
@@ -380,14 +491,14 @@ class _practiceMainState extends State<practiceMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).primaryColor,
         child: Center(
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection('questions').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return LinearProgressIndicator();
 
-              return _buildList(context, snapshot.data.documents);
+              return _buildList(context, snapshot.data.documents, snapshot.data.documents.length);
             },
           ),
         ),
