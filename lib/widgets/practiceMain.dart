@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot, int length) {
+Widget _buildList(
+    BuildContext context, List<DocumentSnapshot> snapshot, int length) {
   snapshot.shuffle();
   print("Length is");
   print(length);
-  int serial=1;
+  int serial = 1;
   return ListView(
     padding: const EdgeInsets.only(top: 20.0),
-    children: snapshot.map((data) => _buildListItem(context, data,length, serial++)).toList(),
+    children: snapshot
+        .map((data) => _buildListItem(context, data, length, serial++))
+        .toList(),
   );
 }
 
-Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial) {
+Widget _buildListItem(
+    BuildContext context, DocumentSnapshot data, length, serial) {
   final record = Record.fromSnapshot(data);
   return Padding(
     key: ValueKey(record.question),
@@ -20,7 +24,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial
     child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-          border: Border.all(color: Colors.grey[300]),
+          border: Border.all(color: Theme.of(context).accentColor),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +36,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial
                   Icons.stop,
                   color: Theme.of(context).highlightColor,
                 ),
-                Text("Q "+serial.toString())
+                Text("Q " + serial.toString())
               ],
             ),
             Align(
@@ -42,432 +46,16 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial
                 child: Text(
                   record.question,
                   style: TextStyle(
-                      color: Colors.blue[500],
+                      color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
               ),
             ),
-            Card(
-              color: Theme.of(context).primaryColor,
-              key: ValueKey(record.question),
-              child: ListTile(
-                leading: Icon(Icons.trip_origin,),
-                title: Text(
-                  record.option1,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                onTap: () {
-                  // record.reference.updateData({'remarks': "This remarks updated"});
-
-                  return showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: Colors.white,
-                          title: Text(
-                            record.question,
-                            style: TextStyle(
-                                color: Colors.blue[500],
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
-                          actions: [
-                            OutlineButton(
-                              child: Text(
-                                "Dismiss",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    // fontWeight: FontWeight.bold,
-                                    fontSize: 10),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                          content: SingleChildScrollView(
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Card(
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 1
-                                        ? Colors.green
-                                        : Colors.red
-                                      ),
-                                      title: Text(
-                                        record.option1,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 2
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option2,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 3
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option3,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 4
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option4,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        );
-                      });
-
-                  // Scaffold.of(context).dialog;
-                },
-              ),
-            ),
-            Card(
-              color: Theme.of(context).primaryColor,
-              child: ListTile(
-                leading: Icon(Icons.trip_origin),
-                title: Text(
-                  record.option2,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                onTap: () {
-                  return showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(record.question),
-                          actions: [
-                            OutlineButton(
-                              child: Text(
-                                "Dismiss",
-                                style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                          content: SingleChildScrollView(
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 1
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option1,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 2
-                                        ? Colors.green
-                                        : Colors.red),
-                                      title: Text(
-                                        record.option2,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 3
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option3,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 4
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option4,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        );
-                      });
-
-                  // Scaffold.of(context).dialog;
-                },
-              ),
-            ),
-            Card(
-              color: Theme.of(context).primaryColor,
-              child: ListTile(
-                leading: Icon(Icons.trip_origin),
-                title: Text(
-                  record.option3,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                onTap: () {
-                  return showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(record.question),
-                          actions: [
-                            OutlineButton(
-                              child: Text(
-                                "Dismiss",
-                                style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                          content: SingleChildScrollView(
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 1
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option1,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 2
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option2,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 3
-                                        ? Colors.green
-                                        : Colors.red),
-                                      title: Text(
-                                        record.option3,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 4
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option4,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        );
-                      });
-
-                  // Scaffold.of(context).dialog;
-                },
-              ),
-            ),
-            Card(
-              color: Theme.of(context).primaryColor,
-              child: ListTile(
-                leading: Icon(Icons.trip_origin),
-                title: Text(
-                  record.option4,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                onTap: () {
-                  return showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(record.question),
-                          actions: [
-                            OutlineButton(
-                              child: Text(
-                                "Dismiss",
-                                style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                          content: SingleChildScrollView(
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 1
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option1,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 2
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option2,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 3
-                                        ? Colors.green
-                                        : Colors.grey,),
-                                      title: Text(
-                                        record.option3,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    
-                                    child: ListTile(
-                                      leading: Icon(Icons.trip_origin,
-                                      color: record.answer == 4
-                                        ? Colors.green
-                                        : Colors.red),
-                                      title: Text(
-                                        record.option4,
-                                        style: TextStyle(
-                                          color: Theme.of(context).accentColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        );
-                      });
-
-                  // Scaffold.of(context).dialog;
-                },
-              ),
-            ),
+            AnswerOptionContainer(record: record, option: 1),
+            AnswerOptionContainer(record: record, option: 2),
+            AnswerOptionContainer(record: record, option: 3),
+            AnswerOptionContainer(record: record, option: 4),
           ],
         )
         //  child: ListTile(
@@ -477,6 +65,62 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot data, length,serial
         //  ),
         ),
   );
+}
+
+class AnswerOptionContainer extends StatefulWidget {
+  const AnswerOptionContainer({
+    Key key,
+    @required this.record,
+    @required this.option,
+  }) : super(key: key);
+
+  final Record record;
+  final int option;
+
+  @override
+  _AnswerOptionContainerState createState() => _AnswerOptionContainerState();
+}
+
+class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
+  final choiceColor = [0xff1E90FF, 0xffeb4559, 0xff21bf73];
+  var index = 0;
+  String getOption(int key) {
+    switch (key) {
+      case 1:
+        return widget.record.option1;
+      case 2:
+        return widget.record.option2;
+      case 3:
+        return widget.record.option3;
+      case 4:
+        return widget.record.option4;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final optionName=widget.record.option+'1';
+    return Container(
+      color: Theme.of(context).primaryColor,
+      key: ValueKey(widget.record.question),
+      child: ListTile(
+        leading: Icon(Icons.trip_origin, 
+        color: Color(choiceColor[index])),
+        title: Text(
+          getOption(widget.option),
+          style: TextStyle(
+            // color: Theme.of(context).accentColor,
+            color: Color(choiceColor[index]),
+          ),
+        ),
+        onTap: () {
+          setState(() {
+            index = widget.record.answer == widget.option ? 2 : 1;
+          });
+        },
+      ),
+    );
+  }
 }
 
 class practiceMain extends StatefulWidget {
@@ -498,7 +142,8 @@ class _practiceMainState extends State<practiceMain> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) return LinearProgressIndicator();
 
-              return _buildList(context, snapshot.data.documents, snapshot.data.documents.length);
+              return _buildList(context, snapshot.data.documents,
+                  snapshot.data.documents.length);
             },
           ),
         ),
