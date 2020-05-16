@@ -22,10 +22,10 @@ class ClearNursing extends StatelessWidget {
             ),
         darkTheme: ThemeData(
             brightness: Brightness.dark, 
-            primaryColor: Colors.black87,
-            accentColor: Colors.grey,
+            primaryColor: Color(0xff1b262c),
+            accentColor: Color(0xffbbe1fa),
             errorColor: Colors.red[800],
-            highlightColor: Color(0xFFFF4F79),
+            highlightColor: Color(0xff3282b8),
             accentColorBrightness: Brightness.dark),
         home: SplashPage(),
         routes: <String, WidgetBuilder>{
