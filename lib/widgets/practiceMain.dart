@@ -83,7 +83,7 @@ class AnswerOptionContainer extends StatefulWidget {
 
 class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
   final choiceColor = [0xff1E90FF, 0xffeb4559, 0xff21bf73];
-  var index = 0;
+  var colorIndex = 0;
   String getOption(int key) {
     switch (key) {
       case 1:
@@ -104,18 +104,17 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
       color: Theme.of(context).primaryColor,
       key: ValueKey(widget.record.question),
       child: ListTile(
-        leading: Icon(Icons.trip_origin, 
-        color: Color(choiceColor[index])),
+        leading: Icon(Icons.trip_origin, color: Color(choiceColor[colorIndex])),
         title: Text(
           getOption(widget.option),
           style: TextStyle(
             // color: Theme.of(context).accentColor,
-            color: Color(choiceColor[index]),
+            color: colorIndex ==0 ?Theme.of(context).accentColor:Color(choiceColor[colorIndex]),
           ),
         ),
         onTap: () {
           setState(() {
-            index = widget.record.answer == widget.option ? 2 : 1;
+            colorIndex = widget.record.answer == widget.option ? 2 : 1;
           });
         },
       ),
