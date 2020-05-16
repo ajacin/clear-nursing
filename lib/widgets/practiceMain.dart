@@ -26,45 +26,71 @@ Widget _buildListItem(
           color: Theme.of(context).primaryColor,
           border: Border.all(color: Theme.of(context).accentColor),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                // Text(record.reference.toString(),
-                Icon(
-                  Icons.stop,
-                  color: Theme.of(context).highlightColor,
-                ),
-                Text("Q " + serial.toString())
-              ],
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Text(
-                  record.question,
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                ),
-              ),
-            ),
-            AnswerOptionContainer(record: record, option: 1),
-            AnswerOptionContainer(record: record, option: 2),
-            AnswerOptionContainer(record: record, option: 3),
-            AnswerOptionContainer(record: record, option: 4),
-          ],
-        )
-        //  child: ListTile(
-        //    title: Text(record.question),
-        //    trailing: Text(record.option1.toString()),
-        //    onTap: () => print(record),
-        //  ),
-        ),
+        child: QuestionAnswer(record: record, serial: serial)),
   );
+}
+
+class QuestionAnswer extends StatefulWidget {
+  const QuestionAnswer({
+    Key key,
+    @required this.record,
+    @required this.serial,
+  }) : super(key: key);
+
+  final Record record;
+  final int serial;
+
+  @override
+  _QuestionAnswerState createState() => _QuestionAnswerState();
+}
+
+class _QuestionAnswerState extends State<QuestionAnswer> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            // Text(record.reference.toString(),
+            // Icon(
+            //   Icons.check_box_outline_blank,
+            //   color: Theme.of(context).highlightColor,
+            // ),
+            Text(
+              " Question " + widget.serial.toString(),
+              style: TextStyle(fontSize: 10),
+            ),
+            Icon(
+              Icons.share,
+              color: Theme.of(context).highlightColor,
+              size: 20,
+            ),
+          ],
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 8.0,top: 8.0),
+            child: Text(
+              widget.record.question,
+              style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20.0),
+        AnswerOptionContainer(record: widget.record, option: 1),
+        AnswerOptionContainer(record: widget.record, option: 2),
+        AnswerOptionContainer(record: widget.record, option: 3),
+        AnswerOptionContainer(record: widget.record, option: 4),
+        const SizedBox(height: 20.0),
+      ],
+    );
+  }
 }
 
 class AnswerOptionContainer extends StatefulWidget {
@@ -104,12 +130,14 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
       color: Theme.of(context).primaryColor,
       key: ValueKey(widget.record.question),
       child: ListTile(
-        leading: Icon(Icons.trip_origin, color: Color(choiceColor[colorIndex])),
+        leading: Icon(Icons.radio_button_unchecked,
+            color: Color(choiceColor[colorIndex])),
         title: Text(
           getOption(widget.option),
           style: TextStyle(
-            // color: Theme.of(context).accentColor,
-            color: colorIndex ==0 ?Theme.of(context).accentColor:Color(choiceColor[colorIndex]),
+            color: colorIndex == 0
+                ? Theme.of(context).accentColor
+                : Color(choiceColor[colorIndex]),
           ),
         ),
         onTap: () {
@@ -122,12 +150,12 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
   }
 }
 
-class practiceMain extends StatefulWidget {
+class PracticeMain extends StatefulWidget {
   @override
-  _practiceMainState createState() => _practiceMainState();
+  _PracticeMainState createState() => _PracticeMainState();
 }
 
-class _practiceMainState extends State<practiceMain> {
+class _PracticeMainState extends State<PracticeMain> {
   bool isSwitched = true;
 
   @override

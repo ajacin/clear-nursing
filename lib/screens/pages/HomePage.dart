@@ -4,7 +4,7 @@ import 'package:clearnursing/screens/pages/FirstScreen.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clearnursing/widgets/userInfo.dart';
-import 'package:clearnursing/widgets/practiceMain.dart';
+import 'package:clearnursing/widgets/PracticeMain.dart';
 import 'package:clearnursing/widgets/Settings.dart';
 
 
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage>
     // Text(
     //   name
     // ),
-    practiceMain(),
+    PracticeMain(),
     Settings()
   ];
   void _onItemTapped(int index) {
