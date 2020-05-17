@@ -33,6 +33,7 @@ dependencies:
   path_provider:
   flutter_launcher_icons:
   share:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:

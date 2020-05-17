@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:share/share.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Widget _buildList(
     BuildContext context, List<DocumentSnapshot> snapshot, int length) {
@@ -126,109 +127,40 @@ class ShareQuestionToEnvironment extends StatelessWidget {
             '4) ' +
             widget.record.option4 +
             '\n';
-         showDialog(
-           context: context,
-                            builder: (BuildContext context){
-                              return AlertDialog(
-            title: Text("Share this question"),
-            content: Text(
-                "Would you like to share this question with answer?"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Without Answer'),
-                onPressed: () {
-                  Share.share(textToCopy, subject: 'Question from Clear Nursing App');
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: Text('With Answer'),
-                onPressed: () {
-                  textToCopy = textToCopy +
-                      '\nAnswer: ' +
-                      widget.record.answer.toString();
-                  Share.share(textToCopy, subject: 'Question from Clear Nursing App');
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-        );
-        }
-         );
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Share this question"),
+                content:
+                    Text("Would you like to share this question with answer?"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Without Answer'),
+                    onPressed: () {
+                      Share.share(textToCopy,
+                          subject: 'Question from Clear Nursing App');
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('With Answer'),
+                    onPressed: () {
+                      textToCopy = textToCopy +
+                          '\nAnswer: ' +
+                          widget.record.answer.toString();
+                      Share.share(textToCopy,
+                          subject: 'Question from Clear Nursing App');
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
       },
     ));
   }
 }
-
-// class CopyQuestionToClipBoard extends StatelessWidget {
-//   const CopyQuestionToClipBoard({
-//     Key key,
-//     @required this.widget,
-//   }) : super(key: key);
-
-//   final QuestionAnswer widget;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: IconButton(
-//         icon: Icon(Icons.content_copy),
-//         color: Theme.of(context).highlightColor,
-//         // size: 20,
-//         onPressed: () {
-//           var textToCopy = widget.record.question +
-//               '\n' +
-//               '1) ' +
-//               widget.record.option1 +
-//               '\n' +
-//               '2) ' +
-//               widget.record.option2 +
-//               '\n' +
-//               '3) ' +
-//               widget.record.option3 +
-//               '\n' +
-//               '4) ' +
-//               widget.record.option4 +
-//               '\n';
-//           ClipboardManager.copyToClipBoard(textToCopy).then((result) {
-//             final snackBar = SnackBar(
-//               content: Text(
-//                 'Copied to clipboard.',
-//                 style: TextStyle(
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               duration: const Duration(seconds: 4),
-//               backgroundColor: Theme.of(context).highlightColor,
-//               action: SnackBarAction(
-//                 label: 'COPY WITH ANSWER',
-//                 onPressed: () {
-//                   textToCopy = textToCopy +
-//                       '\nAnswer: ' +
-//                       widget.record.answer.toString();
-//                   ClipboardManager.copyToClipBoard(textToCopy).then((result) {
-//                     final snackBar = SnackBar(
-//                       content: Text(
-//                         'Copied to clipboard with answer.',
-//                         style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       duration: const Duration(seconds: 3),
-//                       backgroundColor: Theme.of(context).highlightColor,
-//                     );
-//                     Scaffold.of(context).showSnackBar(snackBar);
-//                   });
-//                 },
-//               ),
-//             );
-//             Scaffold.of(context).showSnackBar(snackBar);
-//           });
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class AnswerOptionContainer extends StatefulWidget {
   const AnswerOptionContainer({
@@ -245,7 +177,7 @@ class AnswerOptionContainer extends StatefulWidget {
 }
 
 class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
-  final choiceColor = [0xff1E90FF, 0xffeb4559, 0xff21bf73];
+  final choiceColor = [0xff6c7b95, 0xffeb4559, 0xff21bf73];
   var colorIndex = 0;
   String getOption(int key) {
     switch (key) {
@@ -267,11 +199,18 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
       color: Theme.of(context).primaryColor,
       key: ValueKey(widget.record.question),
       child: ListTile(
-        leading: Icon(Icons.radio_button_unchecked,
-            color: Color(choiceColor[colorIndex])),
+        // leading: Icon(Icons.radio_button_unchecked,
+        //     color: Color(choiceColor[colorIndex])),
+        leading: Icon(
+          FontAwesomeIcons.genderless,
+          size: 30.0,
+          color:  Color(choiceColor[colorIndex]),
+        ),
         title: Text(
           getOption(widget.option),
           style: TextStyle(
+            // fontWeight: FontWeight.bold,
+            fontSize: 18,
             color: colorIndex == 0
                 ? Theme.of(context).accentColor
                 : Color(choiceColor[colorIndex]),
