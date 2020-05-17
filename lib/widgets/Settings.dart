@@ -83,7 +83,18 @@ class Settings extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     color: Theme.of(context).accentColor,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        'Theme automatically changes according to your device\'s dark mode settings.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Theme.of(context).highlightColor,
+                    ));
+                  },
                 ),
                 ListTile(
                   title: Text("Profile Settings"),
@@ -100,7 +111,7 @@ class Settings extends StatelessWidget {
                   onTap: () {},
                 ),
                 SwitchListTile(
-                  title: Text("Email Notifications"),
+                  title: Text("Notify updates"),
                   subtitle: Text(
                     "On",
                     style: TextStyle(
@@ -111,7 +122,7 @@ class Settings extends StatelessWidget {
                   onChanged: (val) {},
                 ),
                 SwitchListTile(
-                  title: Text("Push Notifications"),
+                  title: Text("Practice reminder"),
                   subtitle: Text(
                     "Off",
                     style: TextStyle(
@@ -120,6 +131,28 @@ class Settings extends StatelessWidget {
                   ),
                   value: false,
                   onChanged: (val) {},
+                ),
+                ListTile(
+                  title: Text("About Developer"),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("About Clear Nursing"),
+                            content: Text("Developer : Arun Jacob\nContact : arunjacob2@gmail.com"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text('Ok'),
+                                onPressed: () {
+                                  // Share.share(textToCopy, subject: 'Question from Clear Nursing App');
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                  },
                 ),
                 ListTile(
                   title: Text("Logout"),
