@@ -5,6 +5,7 @@ import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:clearnursing/screens/pages/LoginPage.dart';
+import 'package:clearnursing/screens/pages/AboutDeveloper.dart';
 
 class Settings extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";
@@ -133,25 +134,12 @@ class Settings extends StatelessWidget {
                   onChanged: (val) {},
                 ),
                 ListTile(
-                  title: Text("About Developer"),
+                  title: Text("About"),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("About Clear Nursing"),
-                            content: Text("Developer : Arun Jacob\nContact : arunjacob2@gmail.com"),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text('Ok'),
-                                onPressed: () {
-                                  // Share.share(textToCopy, subject: 'Question from Clear Nursing App');
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutDeveloper()),
+                    );
                   },
                 ),
                 ListTile(

@@ -49,7 +49,9 @@ class _PracticeMainState extends State<PracticeMain> {
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection('questions').snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return LinearProgressIndicator();
+              if (!snapshot.hasData) return LinearProgressIndicator(
+                backgroundColor: Theme.of(context).highlightColor,
+              );
 
               return _buildList(context, snapshot.data.documents,
                   snapshot.data.documents.length);
