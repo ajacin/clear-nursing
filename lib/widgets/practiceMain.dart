@@ -48,6 +48,7 @@ class _PracticeMainState extends State<PracticeMain> {
         child: Center(
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection('questions').snapshots(),
+            // stream: Firestore.instance.collection('questions').where('wrongflag', isGreaterThan: 0).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return LinearProgressIndicator(
                 backgroundColor: Theme.of(context).highlightColor,
@@ -71,6 +72,7 @@ class Record {
   final String option4;
   final int answer;
   final String remarks;
+  final int wrongflag;
 
   final DocumentReference reference;
 
@@ -82,13 +84,15 @@ class Record {
         assert(map['option4'] != null),
         assert(map['answer'] != null),
         assert(map['remarks'] != null),
+        assert(map['wrongflag'] != null),
         question = map['question'],
         option1 = map['option1'],
         option2 = map['option2'],
         option3 = map['option3'],
         option4 = map['option4'],
         answer = map['answer'],
-        remarks = map['remarks'];
+        remarks = map['remarks'],
+        wrongflag = map['wrongflag'];
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);

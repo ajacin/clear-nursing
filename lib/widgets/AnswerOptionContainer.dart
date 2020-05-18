@@ -17,7 +17,8 @@ class AnswerOptionContainer extends StatefulWidget {
 }
 
 class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
-  final choiceColor = [0xff6c7b95, 0xffeb4559, 0xff21bf73];
+  final choiceColor = [0xff6c7b95, 0xffff0000, 0xff00cc00];
+  final choiceIcons = [FontAwesomeIcons.genderless,FontAwesomeIcons.timesCircle,FontAwesomeIcons.checkCircle];
   var colorIndex = 0;
   String getOption(int key) {
     switch (key) {
@@ -42,8 +43,8 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
         // leading: Icon(Icons.radio_button_unchecked,
         //     color: Color(choiceColor[colorIndex])),
         leading: Icon(
-          FontAwesomeIcons.genderless,
-          size: 30.0,
+          choiceIcons[colorIndex],
+          size: 25.0,
           color:  Color(choiceColor[colorIndex]),
         ),
         title: Text(

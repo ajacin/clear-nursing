@@ -39,7 +39,40 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 // CopyQuestionToClipBoard(widget: widget),
-                ShareQuestionToEnvironment(widget: widget)
+                ShareQuestionToEnvironment(widget: widget),
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.report),
+                    color: Theme.of(context).highlightColor,
+                    onPressed: () {
+                      showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Report this question"),
+                content:
+                    Text("Your feedback is valuable. Please report this question if you think this question/answer has some mistakes\n We will review this and correct this."),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Report this'),
+                    onPressed: () {
+                      widget.record.reference.updateData({'wrongflag': widget.record.wrongflag+1});
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
+                      
+                    },
+                  ),
+                )
               ],
             ),
           ],
@@ -67,4 +100,3 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
     );
   }
 }
-

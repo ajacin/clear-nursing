@@ -64,21 +64,21 @@ class AboutDeveloper extends StatelessWidget {
             backgroundColor: Theme.of(context).accentColor,
           ),
           const SizedBox(height: 20.0),
-          FloatingActionButton.extended(
-            onPressed: () {
-              // Add your onPressed code here!
-            },
-            label: Text('Buy me a coffee today!'),
-            icon: Padding(
-              padding: const EdgeInsets.only(left:8.0,right: 7.0),
-              child: Icon(
-                FontAwesomeIcons.coffee,
-                size: 15.0,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            backgroundColor: Theme.of(context).accentColor,
-          ),
+          // FloatingActionButton.extended(
+          //   onPressed: () {
+          //     // Add your onPressed code here!
+          //   },
+          //   label: Text('Buy me a coffee today!'),
+          //   icon: Padding(
+          //     padding: const EdgeInsets.only(left:8.0,right: 7.0),
+          //     child: Icon(
+          //       FontAwesomeIcons.coffee,
+          //       size: 15.0,
+          //       color: Theme.of(context).primaryColor,
+          //     ),
+          //   ),
+          //   backgroundColor: Theme.of(context).accentColor,
+          // ),
         ],
       ),
     );
