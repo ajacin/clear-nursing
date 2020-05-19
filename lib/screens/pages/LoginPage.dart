@@ -71,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<bool> saveSharedPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setString('imageUrl', imageUrl);
+    await preferences.setString('uid', uid);
     return await preferences.setString('user', name);
   }
 

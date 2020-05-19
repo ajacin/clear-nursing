@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/widgets/AnswerOptionContainer.dart';
 import 'package:clearnursing/widgets/ShareQuestionToEnvironment.dart';
 import 'package:clearnursing/widgets/PracticeMain.dart';
+import 'package:clearnursing/screens/pages/SIgnIn.dart';
 
 class QuestionAnswer extends StatefulWidget {
   const QuestionAnswer({
@@ -38,7 +39,44 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                // CopyQuestionToClipBoard(widget: widget),
+                // Text(widget.record.favourite.contains('rbkOpcWxjLM4AwreIqpvRBtLt4D3').toString()=='true'?'FAV':'NoFAV'),
+                InkWell(
+                  child: Container(
+                    child: (() {
+                      if (widget.record.favourite == null) {
+                        return Icon(
+                          Icons.favorite_border,
+                          color: Theme.of(context).highlightColor,
+                        );
+                      } else if (widget.record.favourite
+                              .contains(uid)
+                              .toString() ==
+                          'true') {
+                        return Icon(
+                          Icons.favorite,
+                          color: Theme.of(context).highlightColor,
+                        );
+                      } else
+                        return Icon(
+                          Icons.featured_video,
+                          color: Theme.of(context).highlightColor,
+                        );
+                    })(),
+                  ),
+                  onTap: () {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        'This question is added to your favourites.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Theme.of(context).highlightColor,
+                    ));
+                  },
+                ),
+
                 ShareQuestionToEnvironment(widget: widget),
                 Container(
                   child: IconButton(
@@ -46,30 +84,31 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                     color: Theme.of(context).highlightColor,
                     onPressed: () {
                       showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Report this question"),
-                content:
-                    Text("Your feedback is valuable. Please report this question if you think this question/answer has some mistakes\n We will review this and correct this."),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Report this'),
-                    onPressed: () {
-                      widget.record.reference.updateData({'wrongflag': widget.record.wrongflag+1});
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            });
-                      
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Report this question"),
+                              content: Text(
+                                  "Your feedback is valuable. Please report this question if you think this question/answer has some mistakes\n We will review this and correct this."),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('Report this'),
+                                  onPressed: () {
+                                    widget.record.reference.updateData({
+                                      'wrongflag': widget.record.wrongflag + 1
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
                     },
                   ),
                 )

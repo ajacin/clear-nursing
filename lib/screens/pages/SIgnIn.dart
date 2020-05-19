@@ -9,6 +9,7 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
 String email;
 String imageUrl;
+String uid;
 
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -32,6 +33,7 @@ print('-------->2');
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
+  uid=user.uid;
 
   // Only taking the first part of the name, i.e., First Name
   if (name.contains(" ")) {
@@ -53,6 +55,7 @@ void signOutGoogle() async {
   preferences.remove("name");
   preferences.remove("imageUrl");
   preferences.remove("email");
+  preferences.remove("uid");
 
   print("User Sign Out");
 }

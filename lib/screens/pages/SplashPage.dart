@@ -21,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     print("pullign pref------------->");
     print(preferences.getString("user"));
     imageUrl = preferences.getString("imageUrl");
+    uid=preferences.getString("uid");
     return preferences.getString("user");
     // return null;
   }
