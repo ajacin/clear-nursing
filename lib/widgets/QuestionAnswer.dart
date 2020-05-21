@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:clearnursing/widgets/AnswerOptionContainer.dart';
 import 'package:clearnursing/widgets/ShareQuestionToEnvironment.dart';
 import 'package:clearnursing/widgets/PracticeMain.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class QuestionAnswer extends StatefulWidget {
   const QuestionAnswer({
@@ -19,6 +22,8 @@ class QuestionAnswer extends StatefulWidget {
 }
 
 class _QuestionAnswerState extends State<QuestionAnswer> {
+  // final favouriteIcon = [Icons.bookmark_border,Icons.bookmark];
+  // var favouriteIconIndex=0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +50,7 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                     child: (() {
                       if (widget.record.favourite == null) {
                         return Icon(
-                          Icons.favorite_border,
+                          Icons.bookmark_border,
                           color: Theme.of(context).highlightColor,
                         );
                       } else if (widget.record.favourite
@@ -53,20 +58,24 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                               .toString() ==
                           'true') {
                         return Icon(
-                          Icons.favorite,
+                          Icons.bookmark,
                           color: Theme.of(context).highlightColor,
                         );
                       } else
                         return Icon(
-                          Icons.featured_video,
+                          Icons.bookmark_border,
                           color: Theme.of(context).highlightColor,
                         );
                     })(),
                   ),
                   onTap: () {
+                    widget.record.reference.updateData({
+                                      'favourite': FieldValue.arrayUnion([uid]),
+                                    });
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text(
-                        'This question is added to your favourites.',
+                        // washingtonRef.updateData({"regions", FieldValue.arrayUnion(["greater_virginia"])});
+                        'Added a bookmark to easily access it from bookmarks section',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -111,7 +120,16 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                           });
                     },
                   ),
-                )
+                ),
+                IconButton(
+                    // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
+                    icon: FaIcon(FontAwesomeIcons.ellipsisV,
+                    size: 18,
+                    color: Theme.of(context).highlightColor,
+                    ),
+                    onPressed: () {
+                      print("Pressed");
+                    })
               ],
             ),
           ],
