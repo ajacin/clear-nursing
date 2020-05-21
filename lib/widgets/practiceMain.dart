@@ -9,12 +9,21 @@ Widget _buildList(
   print("Length is");
   print(length);
   int serial = 1;
-  return ListView(
-    padding: const EdgeInsets.only(top: 20.0),
-    children: snapshot
+  PageController _controller = PageController(
+    initialPage: 0,
+);
+ return PageView(
+  controller: _controller,
+  children: snapshot
         .map((data) => _buildListItem(context, data, length, serial++))
         .toList(),
-  );
+);
+  // return ListView(
+  //   padding: const EdgeInsets.only(top: 20.0),
+  //   children: snapshot
+  //       .map((data) => _buildListItem(context, data, length, serial++))
+  //       .toList(),
+  // );
 }
 
 Widget _buildListItem(
