@@ -9,7 +9,7 @@ class AnswerOptionContainer extends StatefulWidget {
     @required this.option,
   }) : super(key: key);
 
-  final Record record;
+  final record;
   final int option;
 
   @override
@@ -23,22 +23,22 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
   String getOption(int key) {
     switch (key) {
       case 1:
-        return widget.record.option1;
+        return widget.record.data['option1'];
       case 2:
-        return widget.record.option2;
+        return widget.record.data['option2'];
       case 3:
-        return widget.record.option3;
+        return widget.record.data['option3'];
       case 4:
-        return widget.record.option4;
+        return widget.record.data['option4'];
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // final optionName=widget.record.option+'1';
+    // final optionName=widget.record.data['option+'1';
     return Container(
       color: Theme.of(context).primaryColor,
-      key: ValueKey(widget.record.question),
+      key: ValueKey(widget.record.data['question']),
       child: ListTile(
         // leading: Icon(Icons.radio_button_unchecked,
         //     color: Color(choiceColor[colorIndex])),
@@ -59,7 +59,7 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
         ),
         onTap: () {
           setState(() {
-            colorIndex = widget.record.answer == widget.option ? 2 : 1;
+            colorIndex = widget.record.data['answer'] == widget.option ? 2 : 1;
           });
         },
       ),

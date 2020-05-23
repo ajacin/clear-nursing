@@ -34,10 +34,14 @@ dependencies:
   flutter_launcher_icons:
   share:
   font_awesome_flutter:
+  mobx:
+  flutter_mobx:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  mobx_codegen:
 
 flutter_icons:
   image_path: "assets/ic_launcher.png"
