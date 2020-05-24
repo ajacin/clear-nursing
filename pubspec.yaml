@@ -36,6 +36,7 @@ dependencies:
   font_awesome_flutter:
   mobx:
   flutter_mobx:
+  connectivity:
 
 dev_dependencies:
   flutter_test:

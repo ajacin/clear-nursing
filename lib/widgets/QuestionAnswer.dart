@@ -143,7 +143,7 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
               style: TextStyle(
                   color: Theme.of(context).accentColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18),
+                  fontSize: 22),
             ),
           ),
         ),

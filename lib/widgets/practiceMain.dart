@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:clearnursing/widgets/QuestionAnswer.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
-
+import 'package:connectivity/connectivity.dart';
+import 'dart:math';
 import 'package:clearnursing/perpage/perpage.dart';
 
 _fetchMore(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -29,15 +29,9 @@ Widget _buildList(
         print(num);
         if (num == 4) {
           print(num * num);
-          // PerPage perPage = PerPage(),
           perPage.nextPages();
           print('jll');
           print('${perPage.perPage}');
-          // _perPage++
-          // _fetchMore(context,snapshot);
-          // print(snapshot.length);
-          // snapshot.add(snapshot[1]);
-          // print(snapshot.length);
 
         }
       },
@@ -46,12 +40,6 @@ Widget _buildList(
           .toList(),
     ),
   );
-  // return ListView(
-  //   padding: const EdgeInsets.only(top: 20.0),
-  //   children: snapshot
-  //       .map((data) => _buildListItem(context, data, length, serial++))
-  //       .toList(),
-  // );
 }
 
 Widget _buildListItem(
@@ -83,6 +71,7 @@ class _PracticeMainState extends State<PracticeMain> {
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   PageController _pageController;
+  String _statusMessage = "Loading";
 
   @override
   void initState() {
@@ -119,14 +108,14 @@ class _PracticeMainState extends State<PracticeMain> {
     if (lastDocument == null) {
       querySnapshot = await firestore
           .collection('questions')
-          .orderBy('question')
+          .orderBy('wrongflag')
           .limit(documentLimit)
           .getDocuments();
     } else {
       querySnapshot = await firestore
           .collection('questions')
-          .orderBy('question')
-          .startAfterDocument(lastDocument)
+          .orderBy('wrongflag', descending: false)
+          .startAfter([0])
           .limit(documentLimit)
           .getDocuments();
       print(1);
@@ -134,7 +123,13 @@ class _PracticeMainState extends State<PracticeMain> {
     if (querySnapshot.documents.length < documentLimit) {
       hasMore = false;
     }
-    lastDocument = querySnapshot.documents[querySnapshot.documents.length - 1];
+    print('last document index');
+    print(querySnapshot.documents.length - 1);
+    // print(querySnapshot.documents[0].data['question']);
+    var indexOfLastDocument = querySnapshot.documents.length == 0
+        ? 0
+        : querySnapshot.documents.length - 1;
+    lastDocument = querySnapshot.documents[indexOfLastDocument];
     products.addAll(querySnapshot.documents);
     if (!mounted) return;
     setState(() {
@@ -142,41 +137,40 @@ class _PracticeMainState extends State<PracticeMain> {
     });
   }
 
+  Future<String> checkNetwork() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return "Loading...";
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return "Loading...";
+    } else {
+      return "No connection";
+    }
+  }
+
+  Future<String> _loadingMessage() async {
+    // var status = await checkNetwork();
+    return _statusMessage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.10,
+          width: MediaQuery.of(context).size.width * 0.95,
+          color: Colors.indigo[50],
+        ),
         Expanded(
           child: products.length == 0
               ? Center(
                   child: CircularProgressIndicator(
-                    valueColor:AlwaysStoppedAnimation<Color>(Theme.of(context).highlightColor),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).highlightColor),
                   ),
                 )
               : PageView(
-                  // children: <Widget>[
-                  //   ListView.builder(
-                  //     controller: _scrollController,
-                  //     itemCount: products.length,
-                  //     itemBuilder: (context, index) {
-                  //       // return ListTile(
-                  //       //   contentPadding: EdgeInsets.all(5),
-                  //       //   title: Text(products[index].data['question']),
-                  //       //   subtitle: Text(products[index].data['option1']),
-                  //       // );
-                  //       // return QuestionAnswer(record: products[index], serial: index);
-                  //       return Container(
-                  //         decoration: BoxDecoration(
-                  //           color: Theme.of(context).primaryColor,
-                  //           border: Border.all(
-                  //               color: Theme.of(context).accentColor),
-                  //         ),
-                  //         child: QuestionAnswer(
-                  //             record: products[index], serial: index + 1),
-                  //       );
-                  //     },
-                  //   ),
-                  // ],
                   children: products
                       .map((data) => QuestionAnswer(
                           record: products[products.indexOf(data)],
@@ -195,13 +189,22 @@ class _PracticeMainState extends State<PracticeMain> {
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.all(5),
                 color: Theme.of(context).highlightColor,
-                child: Text(
-                  'Loading more questions',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: FutureBuilder<String>(
+                    future: checkNetwork(),
+                    builder: (context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        // return Text(snapshot.data);
+                        return Text(
+                          snapshot.data.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              ),
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
               )
             : Container()
       ]),

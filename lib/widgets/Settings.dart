@@ -42,9 +42,14 @@ class Settings extends StatelessWidget {
                         color: Theme.of(context).accentColor,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(
-                            imageUrl,
-                          ),
+                          image: imageUrl.isNotEmpty
+                              ? NetworkImage(
+                                  imageUrl,
+                                )
+                              : CircleAvatar(
+                                  backgroundColor: Colors.brown.shade800,
+                                  child: Text(name.substring(0,1)),
+                                ),
                           fit: BoxFit.cover,
                         ),
                         border: Border.all(

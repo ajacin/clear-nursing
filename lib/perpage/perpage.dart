@@ -10,6 +10,7 @@ abstract class _PerPage with Store{
   int perPage =4;
   int startIndex=0;
   int endIndex=0;
+  int totalquestions=41;
 
   @action
   void nextPages(){

@@ -11,7 +11,7 @@ class ClearNursing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Clear Nursing',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: Colors.white,

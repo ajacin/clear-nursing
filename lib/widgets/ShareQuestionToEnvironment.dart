@@ -17,19 +17,19 @@ class ShareQuestionToEnvironment extends StatelessWidget {
       icon: Icon(Icons.share),
       color: Theme.of(context).highlightColor,
       onPressed: () {
-        var textToCopy = widget.record.question +
+        var textToCopy = widget.record.data['question'] +
             '\n' +
             '1) ' +
-            widget.record.option1 +
+            widget.record.data['option1'] +
             '\n' +
             '2) ' +
-            widget.record.option2 +
+            widget.record.data['option2'] +
             '\n' +
             '3) ' +
-            widget.record.option3 +
+            widget.record.data['option3'] +
             '\n' +
             '4) ' +
-            widget.record.option4 +
+            widget.record.data['option4'] +
             '\n';
         showDialog(
             context: context,
@@ -52,7 +52,7 @@ class ShareQuestionToEnvironment extends StatelessWidget {
                     onPressed: () {
                       textToCopy = textToCopy +
                           '\nAnswer: ' +
-                          widget.record.answer.toString();
+                          widget.record.data['answer'].toString();
                       Share.share(textToCopy,
                           subject: 'Question from Clear Nursing App');
                       Navigator.of(context).pop();
