@@ -93,6 +93,23 @@ class _PracticeMainState extends State<PracticeMain> {
     print('Listening pagemove');
   }
 
+  getRandom() async{
+    QuerySnapshot querySnapshotforMeta;
+    querySnapshotforMeta = await firestore
+          .collection('meta')
+          // .orderBy('wrongflag')
+          // .where("wrongflag", whereIn: getRandom())
+          .limit(1)
+          .getDocuments();
+    // var totalDocs = querySnapshotforMeta.documents.length>0?querySnapshotforMeta.documents.totalquestions;
+    List<DocumentSnapshot> meta = [];
+    meta.addAll(querySnapshotforMeta.documents);
+    var totalDocs = meta[0]['totalquestions'];
+    totalDocs = totalDocs==0?40:totalDocs;
+    var randomArr = new Random();
+  var randomNosInBound = new List.generate(5, (_) => randomArr.nextInt(totalDocs));
+  return randomNosInBound;
+  }
   getProducts() async {
     if (!hasMore) {
       print('No More Products');
@@ -105,26 +122,26 @@ class _PracticeMainState extends State<PracticeMain> {
       isLoading = true;
     });
     QuerySnapshot querySnapshot;
-    if (lastDocument == null) {
+    // if (lastDocument == null) {
+    //   querySnapshot = await firestore
+    //       .collection('questions')
+    //       .orderBy('wrongflag')
+    //       .limit(documentLimit)
+    //       .getDocuments();
+    // } else {
       querySnapshot = await firestore
           .collection('questions')
-          .orderBy('wrongflag')
+          // .orderBy('wrongflag')
+          .where("wrongflag", whereIn: await getRandom())
           .limit(documentLimit)
           .getDocuments();
-    } else {
-      querySnapshot = await firestore
-          .collection('questions')
-          .orderBy('wrongflag', descending: false)
-          .startAfter([0])
-          .limit(documentLimit)
-          .getDocuments();
-      print(1);
-    }
-    if (querySnapshot.documents.length < documentLimit) {
-      hasMore = false;
-    }
-    print('last document index');
-    print(querySnapshot.documents.length - 1);
+      // print(1);
+    // }
+    // if (querySnapshot.documents.length < documentLimit) {
+    //   hasMore = false;
+    // }
+    // print('last document index');
+    // print(querySnapshot.documents.length - 1);
     // print(querySnapshot.documents[0].data['question']);
     var indexOfLastDocument = querySnapshot.documents.length == 0
         ? 0
