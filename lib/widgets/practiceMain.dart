@@ -207,62 +207,65 @@ class _PracticeMainState extends State<PracticeMain> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          SizedBox.fromSize(
-                            size: Size(55, 55), // button width and height
-                            child: ClipOval(
-                              child: Material(
-                                color: Theme.of(context)
-                                    .primaryColor, // button color
-                                child: InkWell(
-                                  splashColor: Colors.green, // splash color
-                                  onTap: () {
-                                    _pageController.nextPage(
-                                        duration: Duration(microseconds: 1000),
-                                        curve: Curves.easeInCirc);
-                                  }, // button pressed
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      FaIcon(FontAwesomeIcons
-                                          .arrowCircleLeft), // icon
-                                      Text("Prev"), // text
-                                    ],
+                    Container(
+                      color: Theme.of(context).primaryColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox.fromSize(
+                              size: Size(55, 55), // button width and height
+                              child: ClipOval(
+                                child: Material(
+                                  color: Theme.of(context)
+                                      .primaryColor, // button color
+                                  child: InkWell(
+                                    splashColor: Colors.green, // splash color
+                                    onTap: () {
+                                      _pageController.nextPage(
+                                          duration: Duration(microseconds: 1000),
+                                          curve: Curves.easeInCirc);
+                                    }, // button pressed
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        FaIcon(FontAwesomeIcons
+                                            .arrowCircleLeft), // icon
+                                        Text("Prev"), // text
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox.fromSize(
-                            size: Size(55, 55), // button width and height
-                            child: ClipOval(
-                              child: Material(
-                                color: Theme.of(context)
-                                    .primaryColor, // button color
-                                child: InkWell(
-                                  splashColor: Colors.green, // splash color
-                                  onTap: () {
-                                    _pageController.nextPage(
-                                        duration: Duration(microseconds: 1000),
-                                        curve: Curves.easeInCirc);
-                                  }, // button pressed
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      FaIcon(FontAwesomeIcons
-                                          .arrowCircleRight), // icon
-                                      Text("Next"), // text
-                                    ],
+                            SizedBox.fromSize(
+                              size: Size(55, 55), // button width and height
+                              child: ClipOval(
+                                child: Material(
+                                  color: Theme.of(context)
+                                      .primaryColor, // button color
+                                  child: InkWell(
+                                    splashColor: Colors.green, // splash color
+                                    onTap: () {
+                                      _pageController.nextPage(
+                                          duration: Duration(microseconds: 1000),
+                                          curve: Curves.easeInCirc);
+                                    }, // button pressed
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        FaIcon(FontAwesomeIcons
+                                            .arrowCircleRight), // icon
+                                        Text("Next"), // text
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
