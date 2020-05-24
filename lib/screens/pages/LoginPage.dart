@@ -4,6 +4,7 @@ import 'package:clearnursing/screens/pages/HomePage.dart';
 import 'package:clearnursing/screens/pages/SIgnIn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:connectivity/connectivity.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,21 +12,57 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _loginStatusMessage = "";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<int> checkNetwork() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return 1;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   Widget _signInButton() {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-        signInWithGoogle().whenComplete(() {
-          print('completed signIn');
-          saveSharedPref();
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return HomePage(title: "Clear Nursing");
-              },
-            ),
-          );
-        });
+      onPressed: () async {
+        final network = await checkNetwork();
+        print(network);
+        if (network == 0) {
+          setState(() {
+            _loginStatusMessage = "No network connection";
+          });
+        }
+        try {
+          signInWithGoogle().whenComplete(() {
+            print('completed signIn');
+            print(name);
+            print(imageUrl);
+            print(email);
+            if (name != null && imageUrl != null && email != null) {
+              saveSharedPref();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomePage(title: "Clear Nursing");
+                  },
+                ),
+              );
+            }
+          });
+        } catch (e) {
+          print(e);
+          print('exception');
+          _signInButton();
+        }
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
@@ -98,6 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                   ])),
               SizedBox(height: 150),
               _signInButton(),
+              Text(_loginStatusMessage,
+              style: TextStyle(
+                color:Colors.red,
+              ),)
             ],
           ),
         ),

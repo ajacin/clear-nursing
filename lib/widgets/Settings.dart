@@ -46,9 +46,11 @@ class Settings extends StatelessWidget {
                               ? NetworkImage(
                                   imageUrl,
                                 )
-                              : CircleAvatar(
-                                  backgroundColor: Colors.brown.shade800,
-                                  child: Text(name.substring(0,1)),
+                              : Image(
+                                  image: AssetImage(
+                                    'assets/google.png',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
                           fit: BoxFit.cover,
                         ),
