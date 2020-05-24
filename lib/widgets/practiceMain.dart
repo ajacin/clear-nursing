@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:math';
 import 'package:clearnursing/perpage/perpage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 _fetchMore(BuildContext context, List<DocumentSnapshot> snapshot) {
   // _perPage++
@@ -32,7 +33,6 @@ Widget _buildList(
           perPage.nextPages();
           print('jll');
           print('${perPage.perPage}');
-
         }
       },
       children: snapshot
@@ -93,23 +93,25 @@ class _PracticeMainState extends State<PracticeMain> {
     print('Listening pagemove');
   }
 
-  getRandom() async{
+  getRandom() async {
     QuerySnapshot querySnapshotforMeta;
     querySnapshotforMeta = await firestore
-          .collection('meta')
-          // .orderBy('wrongflag')
-          // .where("wrongflag", whereIn: getRandom())
-          .limit(1)
-          .getDocuments();
+        .collection('meta')
+        // .orderBy('wrongflag')
+        // .where("wrongflag", whereIn: getRandom())
+        .limit(1)
+        .getDocuments();
     // var totalDocs = querySnapshotforMeta.documents.length>0?querySnapshotforMeta.documents.totalquestions;
     List<DocumentSnapshot> meta = [];
     meta.addAll(querySnapshotforMeta.documents);
     var totalDocs = meta[0]['totalquestions'];
-    totalDocs = totalDocs==0?40:totalDocs;
+    totalDocs = totalDocs == 0 ? 40 : totalDocs;
     var randomArr = new Random();
-  var randomNosInBound = new List.generate(5, (_) => randomArr.nextInt(totalDocs));
-  return randomNosInBound;
+    var randomNosInBound =
+        new List.generate(5, (_) => randomArr.nextInt(totalDocs));
+    return randomNosInBound;
   }
+
   getProducts() async {
     if (!hasMore) {
       print('No More Products');
@@ -129,13 +131,13 @@ class _PracticeMainState extends State<PracticeMain> {
     //       .limit(documentLimit)
     //       .getDocuments();
     // } else {
-      querySnapshot = await firestore
-          .collection('questions')
-          // .orderBy('wrongflag')
-          .where("wrongflag", whereIn: await getRandom())
-          .limit(documentLimit)
-          .getDocuments();
-      // print(1);
+    querySnapshot = await firestore
+        .collection('questions')
+        // .orderBy('wrongflag')
+        .where("wrongflag", whereIn: await getRandom())
+        .limit(documentLimit)
+        .getDocuments();
+    // print(1);
     // }
     // if (querySnapshot.documents.length < documentLimit) {
     //   hasMore = false;
@@ -187,36 +189,100 @@ class _PracticeMainState extends State<PracticeMain> {
                         Theme.of(context).highlightColor),
                   ),
                 )
-              : PageView(
-                  children: products
-                      .map((data) => QuestionAnswer(
-                          record: products[products.indexOf(data)],
-                          serial: products.indexOf(data) + 1))
-                      .toList(),
-                  controller: _pageController,
-                  onPageChanged: (index) {
-                    if (index + 1 == products.length) {
-                      getProducts();
-                    }
-                  },
+              : Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: PageView(
+                        physics: NeverScrollableScrollPhysics(),
+                        children: products
+                            .map((data) => QuestionAnswer(
+                                record: products[products.indexOf(data)],
+                                serial: products.indexOf(data) + 1))
+                            .toList(),
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          if (index + 1 == products.length) {
+                            getProducts();
+                          }
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox.fromSize(
+                            size: Size(55, 55), // button width and height
+                            child: ClipOval(
+                              child: Material(
+                                color: Theme.of(context)
+                                    .primaryColor, // button color
+                                child: InkWell(
+                                  splashColor: Colors.green, // splash color
+                                  onTap: () {
+                                    _pageController.nextPage(
+                                        duration: Duration(microseconds: 1000),
+                                        curve: Curves.easeInCirc);
+                                  }, // button pressed
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      FaIcon(FontAwesomeIcons
+                                          .arrowCircleLeft), // icon
+                                      Text("Prev"), // text
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox.fromSize(
+                            size: Size(55, 55), // button width and height
+                            child: ClipOval(
+                              child: Material(
+                                color: Theme.of(context)
+                                    .primaryColor, // button color
+                                child: InkWell(
+                                  splashColor: Colors.green, // splash color
+                                  onTap: () {
+                                    _pageController.nextPage(
+                                        duration: Duration(microseconds: 1000),
+                                        curve: Curves.easeInCirc);
+                                  }, // button pressed
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      FaIcon(FontAwesomeIcons
+                                          .arrowCircleRight), // icon
+                                      Text("Next"), // text
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
         ),
         isLoading
             ? Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(5),
-                color: Theme.of(context).highlightColor,
+                height: 2,
+                // padding: EdgeInsets.all(5),
+                // color: Theme.of(context).highlightColor,
                 child: FutureBuilder<String>(
                     future: checkNetwork(),
                     builder: (context, AsyncSnapshot<String> snapshot) {
                       if (snapshot.hasData) {
                         // return Text(snapshot.data);
-                        return Text(
-                          snapshot.data.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              // fontWeight: FontWeight.bold,
-                              ),
+                        return LinearProgressIndicator(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).highlightColor),
                         );
                       } else {
                         return CircularProgressIndicator();
