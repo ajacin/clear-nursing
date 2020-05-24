@@ -212,33 +212,8 @@ class _PracticeMainState extends State<PracticeMain> {
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            SizedBox.fromSize(
-                              size: Size(55, 55), // button width and height
-                              child: ClipOval(
-                                child: Material(
-                                  color: Theme.of(context)
-                                      .primaryColor, // button color
-                                  child: InkWell(
-                                    splashColor: Colors.green, // splash color
-                                    onTap: () {
-                                      _pageController.nextPage(
-                                          duration: Duration(microseconds: 1000),
-                                          curve: Curves.easeInCirc);
-                                    }, // button pressed
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        FaIcon(FontAwesomeIcons
-                                            .arrowCircleLeft), // icon
-                                        Text("Prev"), // text
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
                             SizedBox.fromSize(
                               size: Size(55, 55), // button width and height
                               child: ClipOval(

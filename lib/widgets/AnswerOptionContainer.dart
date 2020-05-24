@@ -17,7 +17,7 @@ class AnswerOptionContainer extends StatefulWidget {
 }
 
 class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
-  final choiceColor = [0xff6c7b95, 0xffff0000, 0xff00cc00];
+  final choiceColor = [0xff6c7b95, 0xffE63E33, 0xff00cc00];
   final choiceIcons = [FontAwesomeIcons.genderless,FontAwesomeIcons.timesCircle,FontAwesomeIcons.checkCircle];
   var colorIndex = 0;
   String getOption(int key) {
