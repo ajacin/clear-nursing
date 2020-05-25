@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/home-page.dart';
 import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:clearnursing/widgets/connection-status.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -86,8 +86,8 @@ class _LoginPageState extends State<LoginPage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  height: 20,
-                  width: 25,
+                  height: 22,
+                  width: 30,
                 ),
                 Text(
                   'Continue with Google',
@@ -114,32 +114,23 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                    Icon(Icons.local_hospital),
-                    Text(
-                      "Clear Nursing",
-                      style: GoogleFonts.roboto(
-                          fontSize: 30.0, fontWeight: FontWeight.bold),
-                    )
-                  ])),
-              SizedBox(height: 150),
-              _signInButton(),
-              Text(_loginStatusMessage,
-              style: TextStyle(
-                color:Colors.red,
-              ),)
-            ],
-          ),
+      backgroundColor: Theme.of(context).accentColor,
+      body: SingleChildScrollView(
+              child: Column(
+          // mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ConnectionStatus(),
+            SizedBox(height: 150),
+            Image(
+              image: AssetImage(
+                'assets/nursesdocs.png',
+              ),
+              fit: BoxFit.cover,
+            ),
+            _signInButton(),
+            SizedBox(height: 150),
+          ],
         ),
       ),
     );

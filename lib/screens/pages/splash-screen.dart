@@ -21,8 +21,13 @@ class _SplashPageState extends State<SplashPage> {
     print(preferences.getString("user"));
     imageUrl = preferences.getString("imageUrl");
     uid=preferences.getString("uid");
+    if (imageUrl != null && email != null) {//name will be checked later
+    print('inside condition');
+    print(imageUrl);
+    print(email);
     return preferences.getString("user");
-    // return null;
+    }
+    return null;
   }
         currentUser()
         .then((result) => {

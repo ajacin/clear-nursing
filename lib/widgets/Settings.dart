@@ -38,7 +38,7 @@ class Settings extends StatelessWidget {
                         color: Theme.of(context).accentColor,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: imageUrl.isNotEmpty
+                          image: imageUrl != null
                               ? NetworkImage(
                                   imageUrl,
                                 )

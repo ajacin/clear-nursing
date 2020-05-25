@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:clearnursing/widgets/question-answer.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:math';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:clearnursing/widgets/connection-status.dart';
 
 class PracticeMain extends StatefulWidget {
   @override
@@ -20,7 +20,6 @@ class _PracticeMainState extends State<PracticeMain> {
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   PageController _pageController;
-  String _statusMessage = "Loading";
 
   @override
   void initState() {
@@ -120,6 +119,7 @@ class _PracticeMainState extends State<PracticeMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
+        ConnectionStatus(),
         Container(
           height: MediaQuery.of(context).size.height * 0.10,
           width: MediaQuery.of(context).size.width * 0.95,
@@ -168,11 +168,13 @@ class _PracticeMainState extends State<PracticeMain> {
                                     splashColor: Colors.green, // splash color
                                     onTap: () {
                                       _pageController.nextPage(
-                                          duration: Duration(microseconds: 1000),
+                                          duration:
+                                              Duration(microseconds: 1000),
                                           curve: Curves.easeInCirc);
                                     }, // button pressed
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         FaIcon(FontAwesomeIcons
                                             .arrowCircleRight), // icon
@@ -216,6 +218,7 @@ class _PracticeMainState extends State<PracticeMain> {
     );
   }
 }
+
 
 class Record {
   final String question;
