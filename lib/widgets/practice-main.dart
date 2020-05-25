@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:clearnursing/widgets/question-answer.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:math';
-import 'package:clearnursing/perpage/perpage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PracticeMain extends StatefulWidget {
@@ -116,11 +114,6 @@ class _PracticeMainState extends State<PracticeMain> {
     } else {
       return "No connection";
     }
-  }
-
-  Future<String> _loadingMessage() async {
-    // var status = await checkNetwork();
-    return _statusMessage;
   }
 
   @override

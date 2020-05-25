@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:clearnursing/widgets/practice-main.dart';
 
 class AnswerOptionContainer extends StatefulWidget {
   const AnswerOptionContainer({
@@ -30,6 +29,8 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
         return widget.record.data['option3'];
       case 4:
         return widget.record.data['option4'];
+      default:
+        return '';
     }
   }
 

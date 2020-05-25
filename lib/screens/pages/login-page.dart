@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:clearnursing/screens/pages/first-screen.dart';
 import 'package:clearnursing/screens/pages/home-page.dart';
 import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
