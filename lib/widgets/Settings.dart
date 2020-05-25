@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:clearnursing/screens/pages/FIrstScreen.dart';
-import 'package:clearnursing/screens/pages/HomePage.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:clearnursing/screens/pages/LoginPage.dart';
-import 'package:clearnursing/screens/pages/AboutDeveloper.dart';
+import 'package:clearnursing/screens/pages/google-sign-in.dart';
+import 'package:clearnursing/screens/pages/login-page.dart';
+import 'package:clearnursing/screens/pages/about-developer.dart';
 
 class Settings extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";

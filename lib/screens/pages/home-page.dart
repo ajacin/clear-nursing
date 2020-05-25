@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/FirstScreen.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
+import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:clearnursing/widgets/userInfo.dart';
-import 'package:clearnursing/widgets/PracticeMain.dart';
-import 'package:clearnursing/widgets/Settings.dart';
+import 'package:clearnursing/widgets/practice-main.dart';
+import 'package:clearnursing/widgets/settings.dart';
 
 
 class HomePage extends StatefulWidget {

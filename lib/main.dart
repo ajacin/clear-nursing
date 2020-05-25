@@ -1,8 +1,8 @@
-import 'package:clearnursing/screens/pages/LoginPage.dart';
+import 'package:clearnursing/screens/pages/login-page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:clearnursing/screens/pages/HomePage.dart';
-import 'package:clearnursing/screens/pages/SplashPage.dart';
+import 'package:clearnursing/screens/pages/home-page.dart';
+import 'package:clearnursing/screens/pages/splash-screen.dart';
 
 void main() => runApp(ClearNursing());
 

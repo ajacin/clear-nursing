@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:clearnursing/screens/pages/HomePage.dart';
+import 'package:clearnursing/screens/pages/home-page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
+import 'package:clearnursing/screens/pages/google-sign-in.dart';
 
 
 class SplashPage extends StatefulWidget {

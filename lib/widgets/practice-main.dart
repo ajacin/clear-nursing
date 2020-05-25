@@ -1,61 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:clipboard_manager/clipboard_manager.dart';
-import 'package:clearnursing/widgets/QuestionAnswer.dart';
+import 'package:clearnursing/widgets/question-answer.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:math';
 import 'package:clearnursing/perpage/perpage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-_fetchMore(BuildContext context, List<DocumentSnapshot> snapshot) {
-  // _perPage++
-}
-
-Widget _buildList(
-    // final PerPage perPage = PerPage(),
-    BuildContext context,
-    List<DocumentSnapshot> snapshot,
-    int length) {
-  snapshot.shuffle();
-  print("Length is");
-  print(length);
-  int serial = 1;
-  PageController _controller = PageController(initialPage: 0, keepPage: false);
-  PerPage perPage = PerPage();
-  return Observer(
-    builder: (context) => PageView(
-      controller: _controller,
-      onPageChanged: (num) {
-        print(num);
-        if (num == 4) {
-          print(num * num);
-          perPage.nextPages();
-          print('jll');
-          print('${perPage.perPage}');
-        }
-      },
-      children: snapshot
-          .map((data) => _buildListItem(context, data, length, serial++))
-          .toList(),
-    ),
-  );
-}
-
-Widget _buildListItem(
-    BuildContext context, DocumentSnapshot data, length, serial) {
-  final record = Record.fromSnapshot(data);
-  return Padding(
-    key: ValueKey(record.question),
-    padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
-    child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          border: Border.all(color: Theme.of(context).accentColor),
-        ),
-        child: QuestionAnswer(record: record, serial: serial)),
-  );
-}
 
 class PracticeMain extends StatefulWidget {
   @override

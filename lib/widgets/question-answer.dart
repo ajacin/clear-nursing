@@ -1,10 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:clearnursing/widgets/AnswerOptionContainer.dart';
-import 'package:clearnursing/widgets/ShareQuestionToEnvironment.dart';
-import 'package:clearnursing/widgets/PracticeMain.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
-
+import 'package:clearnursing/widgets/answer-option-container.dart';
+import 'package:clearnursing/widgets/share-question.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class QuestionAnswer extends StatefulWidget {

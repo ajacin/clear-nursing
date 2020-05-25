@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:clearnursing/widgets/QuestionAnswer.dart';
+import 'package:clearnursing/widgets/question-answer.dart';
 
 class ShareQuestionToEnvironment extends StatelessWidget {
   const ShareQuestionToEnvironment({

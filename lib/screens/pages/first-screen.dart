@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:clearnursing/screens/pages/LoginPage.dart';
-import 'package:clearnursing/screens/pages/SIgnIn.dart';
+import 'package:clearnursing/screens/pages/login-page.dart';
+import 'package:clearnursing/screens/pages/google-sign-in.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
