@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:clearnursing/widgets/PracticeMain.dart';
+import 'package:clearnursing/widgets/practice-main.dart';
 
 class AnswerOptionContainer extends StatefulWidget {
   const AnswerOptionContainer({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:clearnursing/screens/pages/FirstScreen.dart';
+import 'package:clearnursing/screens/pages/first-screen.dart';
 import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clearnursing/widgets/practice-main.dart';
