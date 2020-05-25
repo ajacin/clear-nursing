@@ -152,11 +152,32 @@ class Settings extends StatelessWidget {
                 ListTile(
                   title: Text("Logout"),
                   onTap: () {
-                    signOutGoogle();
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) {
-                      return LoginPage();
-                    }), ModalRoute.withName('/'));
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Logout"),
+                            content: Text("Are you sure you want to log out?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text('Logout'),
+                                onPressed: () {
+                                  signOutGoogle();
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(builder: (context) {
+                                    return LoginPage();
+                                  }), ModalRoute.withName('/'));
+                                },
+                              ),
+                              FlatButton(
+                                child: Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
                   },
                 ),
               ],
