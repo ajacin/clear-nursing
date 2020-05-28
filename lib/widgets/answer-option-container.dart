@@ -52,7 +52,7 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
           getOption(widget.option),
           style: TextStyle(
             // fontWeight: FontWeight.bold,
-            fontSize: 22,
+            fontSize: 20,
             color: colorIndex == 0
                 ? Theme.of(context).accentColor
                 : Color(choiceColor[colorIndex]),

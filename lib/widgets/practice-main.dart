@@ -118,6 +118,7 @@ class _PracticeMainState extends State<PracticeMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(children: [
         ConnectionStatus(),
         Container(

@@ -137,6 +137,20 @@ class Settings extends StatelessWidget {
                   onChanged: (val) {},
                 ),
                 ListTile(
+                  title: Text("Application Version"),
+                  subtitle: Text(
+                    "1.0.0",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.system_update_alt,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
                   title: Text("About"),
                   onTap: () {
                     Navigator.push(

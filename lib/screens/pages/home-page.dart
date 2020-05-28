@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage>
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).primaryColor,
         items: <BottomNavigationBarItem>[
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.school),

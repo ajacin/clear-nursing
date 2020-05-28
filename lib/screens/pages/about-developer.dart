@@ -14,7 +14,7 @@ class AboutDeveloper extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             Text(
-              "ARUN JACOB",
+              "ARJACOB/JIROY",
               style: TextStyle(
                   color: Theme.of(context).accentColor,
                   fontWeight: FontWeight.bold,
@@ -23,12 +23,12 @@ class AboutDeveloper extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
-                  "Clear-Nursing application provides handy access to a handful of picked questions to brush up knowledge related to the nursing subject. As a developer, I have tried to provide easy to use features with a no-nonsense approach. "),
+                  "Clear-Nursing application provides access to a handful of carefully picked questions to brush up your knowledge in the nursing subjects. A no-nonsense approach is the primary focus of the development. You, as a user, can focus on the questions. Your feedbacks are important for us to provide more quality contents."),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
-                  "I am a software and application developer based in India. Your support is the essential fuel that drives me to contribute more. If you liked this application, spend some time to review this application in the Playstore. Kindly share your valuable suggestions and feedback directly using the form below."),
+                  "arunjacob2@gmail.com"),
             ),
             RaisedButton(
               color: Theme.of(context).accentColor,
