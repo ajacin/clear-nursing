@@ -13,16 +13,16 @@ class ClearNursing extends StatelessWidget {
         title: 'Clear Nursing',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Colors.white,
-            accentColor: Colors.black,
+            primaryColor: Color(0xffFFFFFF),
+            accentColor: Color(0xff00147A),
             errorColor: Colors.red[800],
-            highlightColor: Color(0xFFFF4F79),
+            highlightColor: Color(0xFF1C83F1),
             accentColorBrightness: Brightness.light
             ),
         darkTheme: ThemeData(
             brightness: Brightness.dark, 
-            primaryColor: Color(0xff1b262c),
-            accentColor: Color(0xffbbe1fa),
+            primaryColor: Color(0xff333A54),
+            accentColor: Color(0xffFFFFFF),
             errorColor: Colors.red[800],
             highlightColor: Color(0xff3282b8),
             accentColorBrightness: Brightness.dark),
