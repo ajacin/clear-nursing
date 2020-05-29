@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/widgets/answer-option-container.dart';
 import 'package:clearnursing/widgets/share-question.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionAnswer extends StatefulWidget {
   const QuestionAnswer({
@@ -23,7 +24,8 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:20.0,bottom: 20.0,right: 7.0,left: 7.0),
+      padding:
+          const EdgeInsets.only(top: 20.0, bottom: 20.0, right: 7.0, left: 7.0),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
@@ -34,16 +36,16 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
             Radius.circular(20),
           ),
           boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).accentColor,
-            blurRadius: 10.0, // soften the shadow
-            spreadRadius: 1.0, //extend the shadow
-            // offset: Offset(
-            //   5.0, // Move to right 10  horizontally
-            //   5.0, 
-            // ),
-          )
-        ],
+            BoxShadow(
+              color: Theme.of(context).accentColor,
+              blurRadius: 10.0, // soften the shadow
+              spreadRadius: 1.0, //extend the shadow
+              // offset: Offset(
+              //   5.0, // Move to right 10  horizontally
+              //   5.0,
+              // ),
+            )
+          ],
         ),
         // color: Theme.of(context).primaryColor,
         child: Padding(
@@ -164,10 +166,13 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                     padding: EdgeInsets.only(left: 8.0, top: 8.0),
                     child: Text(
                       widget.record.data['question'],
-                      style: TextStyle(
-                          color: Theme.of(context).accentColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                      style: GoogleFonts.robotoSlab(
+                        textStyle: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            letterSpacing: .5),
+                      ),
                     ),
                   ),
                 ),

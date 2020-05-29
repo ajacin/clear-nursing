@@ -16,7 +16,7 @@ class _PracticeMainState extends State<PracticeMain> {
   List<DocumentSnapshot> products = [];
   bool isLoading = false;
   bool hasMore = true;
-  int documentLimit = 5;
+  int documentLimit = 10;
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   PageController _pageController;
@@ -53,6 +53,7 @@ class _PracticeMainState extends State<PracticeMain> {
     List<DocumentSnapshot> meta = [];
     meta.addAll(querySnapshotforMeta.documents);
     var totalDocs = meta[0]['totalquestions'];
+    // documentLimit = meta[0]['documentlimit'];
     totalDocs = totalDocs == 0 ? 40 : totalDocs;
     var randomArr = new Random();
     var randomNosInBound =

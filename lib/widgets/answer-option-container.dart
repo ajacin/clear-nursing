@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnswerOptionContainer extends StatefulWidget {
   const AnswerOptionContainer({
@@ -50,13 +51,15 @@ class _AnswerOptionContainerState extends State<AnswerOptionContainer> {
         ),
         title: Text(
           getOption(widget.option),
-          style: TextStyle(
-            // fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: colorIndex == 0
+          style: GoogleFonts.robotoSlab(
+                        textStyle: TextStyle(
+                            color: colorIndex == 0
                 ? Theme.of(context).accentColor
                 : Color(choiceColor[colorIndex]),
-          ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            letterSpacing: .5),
+                      ),
         ),
         onTap: () {
           setState(() {

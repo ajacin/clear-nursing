@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clearnursing/widgets/practice-main.dart';
 import 'package:clearnursing/widgets/settings.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -11,10 +11,10 @@ class HomePage extends StatefulWidget {
   Future<String> loadSharedPrefData(key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(key);
-}
+  }
+
   @override
-  _HomePageState createState() => _HomePageState(
-  );
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
@@ -33,8 +33,6 @@ class _HomePageState extends State<HomePage>
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +40,18 @@ class _HomePageState extends State<HomePage>
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         titleSpacing: 0.0,
-        leading: Icon(Icons.local_hospital),
+        leading: Icon(Icons.local_hospital,
+        color: Theme.of(context).highlightColor,
+        size: 35,),
         title: Text(
           widget.title,
+          style: GoogleFonts.megrim(
+            textStyle: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: .5),
+          ),
         ),
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
