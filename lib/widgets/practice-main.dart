@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:clearnursing/widgets/question-answer.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:math';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:clearnursing/widgets/connection-status.dart';
+import 'package:clearnursing/widgets/clear-action-button.dart';
 
 class PracticeMain extends StatefulWidget {
   @override
@@ -116,6 +116,11 @@ class _PracticeMainState extends State<PracticeMain> {
     }
   }
 
+  _scrollToNextItem() {
+    _pageController.nextPage(
+        duration: Duration(microseconds: 1000), curve: Curves.easeInCirc);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,31 +165,11 @@ class _PracticeMainState extends State<PracticeMain> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            SizedBox.fromSize(
-                              size: Size(55, 55), // button width and height
-                              child: ClipOval(
-                                child: Material(
-                                  color: Theme.of(context)
-                                      .primaryColor, // button color
-                                  child: InkWell(
-                                    splashColor: Colors.green, // splash color
-                                    onTap: () {
-                                      _pageController.nextPage(
-                                          duration:
-                                              Duration(microseconds: 1000),
-                                          curve: Curves.easeInCirc);
-                                    }, // button pressed
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        FaIcon(FontAwesomeIcons
-                                            .arrowCircleRight), // icon
-                                        Text("Next"), // text
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom:8.0,right: 8.0),
+                              child: ClearActionButton(
+                                parentAction: _scrollToNextItem,
+                                label:"Next"
                               ),
                             )
                           ],
@@ -220,7 +205,6 @@ class _PracticeMainState extends State<PracticeMain> {
     );
   }
 }
-
 
 class Record {
   final String question;
