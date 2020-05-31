@@ -83,7 +83,7 @@ class _PracticeMainState extends State<PracticeMain> {
     querySnapshot = await firestore
         .collection('questions')
         // .orderBy('wrongflag')
-        .where("wrongflag", whereIn: await getRandom())
+        .where("index", whereIn: await getRandom())
         .limit(documentLimit)
         .getDocuments();
     // print(1);
@@ -94,10 +94,10 @@ class _PracticeMainState extends State<PracticeMain> {
     // print('last document index');
     // print(querySnapshot.documents.length - 1);
     // print(querySnapshot.documents[0].data['question']);
-    var indexOfLastDocument = querySnapshot.documents.length == 0
-        ? 0
-        : querySnapshot.documents.length - 1;
-    lastDocument = querySnapshot.documents[indexOfLastDocument];
+    // var indexOfLastDocument = querySnapshot.documents.length == 0
+    //     ? 0
+    //     : querySnapshot.documents.length - 1;
+    // lastDocument = querySnapshot.documents[indexOfLastDocument];
     products.addAll(querySnapshot.documents);
     if (!mounted) return;
     setState(() {

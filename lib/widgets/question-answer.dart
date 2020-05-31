@@ -3,7 +3,8 @@ import 'package:clearnursing/widgets/answer-option-container.dart';
 import 'package:clearnursing/widgets/share-question.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:clearnursing/screens/pages/google-sign-in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class QuestionAnswer extends StatefulWidget {
   const QuestionAnswer({
     Key key,
@@ -21,6 +22,49 @@ class QuestionAnswer extends StatefulWidget {
 class _QuestionAnswerState extends State<QuestionAnswer> {
   // final favouriteIcon = [Icons.bookmark_border,Icons.bookmark];
   // var favouriteIconIndex=0;
+  Future < void > updateFavourites(int indexval, String action) async {
+    if(action=="add"){
+      await Firestore.instance.collection("questions").document(indexval.toString()).updateData({  
+        'favourite': FieldValue.arrayUnion([uid]),  
+    }).then((documentReference) {  
+        print('succ updated fav add'); 
+        Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                // washingtonRef.updateData({"regions", FieldValue.arrayUnion(["greater_virginia"])});
+                                'Added Bookmark',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              duration: const Duration(seconds: 3),
+                              backgroundColor: Theme.of(context).highlightColor,
+                            ));
+    }).catchError((e) {  
+        print(e);  
+    }); 
+    }
+    else{
+      await Firestore.instance.collection("questions").document(indexval.toString()).updateData({  
+        'favourite': FieldValue.arrayRemove([uid]),  
+    }).then((documentReference) {  
+        print('succ updated fav rem'); 
+        Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                // washingtonRef.updateData({"regions", FieldValue.arrayUnion(["greater_virginia"])});
+                                'Removed Bookmark',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              duration: const Duration(seconds: 3),
+                              backgroundColor: Theme.of(context).highlightColor,
+                            ));
+    }).catchError((e) {  
+        print(e);  
+    }); 
+    }
+     
+}  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,54 +106,56 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                       Icons.check_box_outline_blank,
                       color: Theme.of(context).highlightColor,
                     ),
+                    // Text(
+                    //   " Question " + widget.serial.toString(),
+                    //   style: TextStyle(fontSize: 13),
+                    // ),
                     Text(
-                      " Question " + widget.serial.toString(),
+                      " Index: " + widget.record.data['index'].toString(),
                       style: TextStyle(fontSize: 13),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        // Text(widget.record.data['favourite'].contains('rbkOpcWxjLM4AwreIqpvRBtLt4D3').toString()=='true'?'FAV':'NoFAV'),
-                        // InkWell(
-                        //   child: Container(
-                        //     child: (() {
-                        //       if (widget.record.data['favourite'] == null) {
-                        //         return Icon(
-                        //           Icons.bookmark_border,
-                        //           color: Theme.of(context).highlightColor,
-                        //         );
-                        //       } else if (widget.record.data['favourite']
-                        //               .contains(uid)
-                        //               .toString() ==
-                        //           'true') {
-                        //         return Icon(
-                        //           Icons.bookmark,
-                        //           color: Theme.of(context).highlightColor,
-                        //         );
-                        //       } else
-                        //         return Icon(
-                        //           Icons.bookmark_border,
-                        //           color: Theme.of(context).highlightColor,
-                        //         );
-                        //     })(),
-                        //   ),
-                        //   onTap: () {
-                        //     // widget.record.reference.updateData({
-                        //     //                   'favourite': FieldValue.arrayUnion([uid]),
-                        //     //                 });
-                        //     Scaffold.of(context).showSnackBar(SnackBar(
-                        //       content: Text(
-                        //         // washingtonRef.updateData({"regions", FieldValue.arrayUnion(["greater_virginia"])});
-                        //         'Added a bookmark to easily access it from bookmarks section',
-                        //         style: TextStyle(
-                        //           fontWeight: FontWeight.bold,
-                        //         ),
-                        //       ),
-                        //       duration: const Duration(seconds: 3),
-                        //       backgroundColor: Theme.of(context).highlightColor,
-                        //     ));
-                        //   },
-                        // ),
+                        InkWell(
+                          child: Container(
+                            child: (() {
+                              if (widget.record.data['favourite'] == null) {
+                                return Icon(
+                                  Icons.bookmark_border,
+                                  color: Theme.of(context).highlightColor,
+                                );
+                              } else if (widget.record.data['favourite']
+                                      .contains(uid)
+                                      .toString() ==
+                                  'true') {
+                                return Icon(
+                                  Icons.bookmark,
+                                  color: Theme.of(context).highlightColor,
+                                );
+                              } else
+                                return Icon(
+                                  Icons.bookmark_border,
+                                  color: Theme.of(context).highlightColor,
+                                );
+                            })(),
+                          ),
+                          onTap: () {
+
+                            if (widget.record.data['favourite'] == null || widget.record.data['favourite'].length==0||widget.record.data['favourite']
+                                      .contains(uid)
+                                      .toString() ==
+                                  'false'){
+                                      updateFavourites(widget.record.data['index'],"add");
+                                      widget.record.data['favourite'].addAll(uid);
+                                  }
+                                  else{
+                                    updateFavourites(widget.record.data['index'],"remove");
+                                    widget.record.data['favourite'].remove(uid);
+                                  }
+                            
+                          },
+                        ),
 
                         ShareQuestionToEnvironment(widget: widget),
                         // Container(
