@@ -122,11 +122,15 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             ConnectionStatus(),
             SizedBox(height: 150),
-            Image(
-              image: AssetImage(
-                'assets/nursesdocs.png',
+            Container(
+              height: 500,
+              width: 500,
+              child: Image(
+                image: AssetImage(
+                  'assets/nursesdocs.png',
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
             _signInButton(),
             SizedBox(height: 150),

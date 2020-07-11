@@ -43,6 +43,7 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   mobx_codegen:
+  flutter_native_splash:
 
 flutter_icons:
   image_path: "assets/ic_launcher.png"
@@ -54,6 +55,9 @@ flutter_icons:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+flutter_native_splash:
+  color: "FFFFFF"
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -66,6 +70,7 @@ flutter:
    - assets/google.png
    - assets/play.png
    - assets/nursesdocs.png
+   - assets/ic_launcher.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
