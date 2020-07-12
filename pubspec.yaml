@@ -38,6 +38,7 @@ dependencies:
   connectivity:
   connection_status_bar:
   firebase_messaging:
+  package_info:
 
 dev_dependencies:
   flutter_test:

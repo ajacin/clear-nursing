@@ -3,6 +3,7 @@ import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:clearnursing/screens/pages/login-page.dart';
 import 'package:clearnursing/screens/pages/about-developer.dart';
 import 'package:clearnursing/widgets/messaging-widget.dart';
+import 'package:package_info/package_info.dart';
 
 class Settings extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";
@@ -12,6 +13,17 @@ class Settings extends StatelessWidget {
   // final TextStyle greyTExt = TextStyle(
   //   color: Theme.of(context).accentColor,
   // );
+  Future<String> getVersionNumber() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+
+    // Other data you can get:
+    //
+    // 	String appName = packageInfo.appName;
+    // 	String packageName = packageInfo.packageName;
+    //	String buildNumber = packageInfo.buildNumber;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,9 +114,9 @@ class Settings extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("Profile Settings"),
+                  title: Text("Profile Category"),
                   subtitle: Text(
-                    name,
+                    "Learner",
                     style: TextStyle(
                       color: Theme.of(context).accentColor,
                     ),
@@ -139,12 +151,17 @@ class Settings extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text("Application Version"),
-                  subtitle: Text(
-                    "1.0.0",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
+                  subtitle: FutureBuilder(
+                      future:
+                          getVersionNumber(), // The async function we wrote earlier that will be providing the data i.e vers. no
+                      builder: (BuildContext context,
+                              AsyncSnapshot<String> snapshot) =>
+                          Text(
+                            snapshot.hasData
+                                ? snapshot.data
+                                : "Loading version",
+                          ) // The widget using the data
+                      ),
                   trailing: Icon(
                     Icons.system_update_alt,
                     color: Theme.of(context).accentColor,
@@ -191,10 +208,7 @@ class Settings extends StatelessWidget {
                         });
                   },
                 ),
-                SizedBox(
-                  height:200,
-                  child: MessagingWidget()
-                  )
+                SizedBox(height: 200, child: MessagingWidget())
               ],
             ),
           ),
