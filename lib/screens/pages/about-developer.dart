@@ -28,7 +28,7 @@ class AboutDeveloper extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
-                  "arunjacob2@gmail.com"),
+                  "clearnursing@ajac.in"),
             ),
             RaisedButton(
               color: Theme.of(context).accentColor,

@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'dart:math';
 import 'package:clearnursing/widgets/connection-status.dart';
 import 'package:clearnursing/widgets/clear-action-button.dart';
+import 'package:clearnursing/widgets/messaging-widget.dart';
 
 class PracticeMain extends StatefulWidget {
   @override
@@ -200,8 +201,12 @@ class _PracticeMainState extends State<PracticeMain> {
                       }
                     }),
               )
-            : Container()
+            : Container(),
+            SizedBox(
+                  child: MessagingWidget()
+                  )
       ]),
+      
     );
   }
 }

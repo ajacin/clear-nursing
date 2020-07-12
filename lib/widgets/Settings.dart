@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:clearnursing/screens/pages/login-page.dart';
 import 'package:clearnursing/screens/pages/about-developer.dart';
+import 'package:clearnursing/widgets/messaging-widget.dart';
 
 class Settings extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings2.dart";
@@ -190,6 +191,10 @@ class Settings extends StatelessWidget {
                         });
                   },
                 ),
+                SizedBox(
+                  height:200,
+                  child: MessagingWidget()
+                  )
               ],
             ),
           ),

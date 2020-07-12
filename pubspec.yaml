@@ -37,6 +37,7 @@ dependencies:
   flutter_mobx:
   connectivity:
   connection_status_bar:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:
