@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:clearnursing/screens/pages/google-sign-in.dart';
 import 'package:clearnursing/screens/pages/login-page.dart';
 import 'package:clearnursing/screens/pages/about-developer.dart';
+import 'package:clearnursing/screens/pages/feature-request.dart';
 import 'package:clearnursing/widgets/messaging-widget.dart';
 import 'package:package_info/package_info.dart';
 
@@ -60,6 +61,7 @@ class _SettingsState extends State<Settings> {
                   onTap: () {},
                 ),
                 AboutAppInfo(),
+                RequestFeature(),
                 LogoutTile(),
                 SizedBox(height: 200, child: MessagingWidget())
               ],
@@ -133,6 +135,25 @@ class AboutAppInfo extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AboutDeveloper()),
+        );
+      },
+    );
+  }
+}
+
+class RequestFeature extends StatelessWidget {
+  const RequestFeature({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text("Request a Feature"),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeatureRequest()),
         );
       },
     );
