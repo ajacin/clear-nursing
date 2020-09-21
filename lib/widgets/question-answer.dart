@@ -99,63 +99,63 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     // Text(record.reference.toString(),
-                    Icon(
-                      Icons.check_box_outline_blank,
-                      color: Theme.of(context).highlightColor,
-                    ),
+                    // Icon(
+                    //   Icons.check_box_outline_blank,
+                    //   color: Theme.of(context).highlightColor,
+                    // ),
                     // Text(
                     //   " Question " + widget.serial.toString(),
                     //   style: TextStyle(fontSize: 13),
                     // ),
-                    Text(
-                      " Index: " + widget.record.data['index'].toString(),
-                      style: TextStyle(fontSize: 13),
-                    ),
+                    // Text(
+                    //   " Index: " + widget.record.data['index'].toString(),
+                    //   style: TextStyle(fontSize: 13),
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            child: (() {
-                              if (widget.record.data['favourite'] == null) {
-                                return Icon(
-                                  Icons.bookmark_border,
-                                  color: Theme.of(context).highlightColor,
-                                );
-                              } else if (widget.record.data['favourite']
-                                      .contains(uid)
-                                      .toString() ==
-                                  'true') {
-                                return Icon(
-                                  Icons.bookmark,
-                                  color: Theme.of(context).highlightColor,
-                                );
-                              } else
-                                return Icon(
-                                  Icons.bookmark_border,
-                                  color: Theme.of(context).highlightColor,
-                                );
-                            })(),
-                          ),
-                          onTap: () {
+                        // InkWell(
+                        //   child: Container(
+                        //     child: (() {
+                        //       if (widget.record.data['favourite'] == null) {
+                        //         return Icon(
+                        //           Icons.bookmark_border,
+                        //           color: Theme.of(context).highlightColor,
+                        //         );
+                        //       } else if (widget.record.data['favourite']
+                        //               .contains(uid)
+                        //               .toString() ==
+                        //           'true') {
+                        //         return Icon(
+                        //           Icons.bookmark,
+                        //           color: Theme.of(context).highlightColor,
+                        //         );
+                        //       } else
+                        //         return Icon(
+                        //           Icons.bookmark_border,
+                        //           color: Theme.of(context).highlightColor,
+                        //         );
+                        //     })(),
+                        //   ),
+                        //   onTap: () {
 
-                            if (widget.record.data['favourite'] == null || widget.record.data['favourite'].length==0||widget.record.data['favourite']
-                                      .contains(uid)
-                                      .toString() ==
-                                  'false'){
-                                      updateFavourites(widget.record.data['index'],"add");
-                                      widget.record.data['favourite'].addAll(uid);
-                                  }
-                                  else{
-                                    updateFavourites(widget.record.data['index'],"remove");
-                                    widget.record.data['favourite'].remove(uid);
-                                  }
+                        //     if (widget.record.data['favourite'] == null || widget.record.data['favourite'].length==0||widget.record.data['favourite']
+                        //               .contains(uid)
+                        //               .toString() ==
+                        //           'false'){
+                        //               updateFavourites(widget.record.data['index'],"add");
+                        //               widget.record.data['favourite'].addAll(uid);
+                        //           }
+                        //           else{
+                        //             updateFavourites(widget.record.data['index'],"remove");
+                        //             widget.record.data['favourite'].remove(uid);
+                        //           }
                             
-                          },
-                        ),
+                        //   },
+                        // ),
 
                         ShareQuestionToEnvironment(widget: widget),
                         // Container(
@@ -192,16 +192,16 @@ class _QuestionAnswerState extends State<QuestionAnswer> {
                         //     },
                         //   ),
                         // ),
-                        IconButton(
-                            // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                            icon: FaIcon(
-                              FontAwesomeIcons.ellipsisV,
-                              size: 18,
-                              color: Theme.of(context).highlightColor,
-                            ),
-                            onPressed: () {
-                              print("Pressed");
-                            })
+                        // IconButton(
+                        //     // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
+                        //     icon: FaIcon(
+                        //       FontAwesomeIcons.ellipsisV,
+                        //       size: 18,
+                        //       color: Theme.of(context).highlightColor,
+                        //     ),
+                        //     onPressed: () {
+                        //       print("Pressed");
+                        //     })
                       ],
                     ),
                   ],

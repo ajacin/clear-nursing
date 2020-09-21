@@ -39,6 +39,7 @@ dependencies:
   connection_status_bar:
   firebase_messaging:
   package_info:
+  admob_flutter: ^0.3.4
 
 dev_dependencies:
   flutter_test:

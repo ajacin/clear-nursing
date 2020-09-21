@@ -6,6 +6,8 @@ import 'dart:math';
 import 'package:clearnursing/widgets/connection-status.dart';
 import 'package:clearnursing/widgets/clear-action-button.dart';
 import 'package:clearnursing/widgets/messaging-widget.dart';
+import 'package:admob_flutter/admob_flutter.dart';
+import 'package:clearnursing/services/admob_services.dart';
 
 class PracticeMain extends StatefulWidget {
   @override
@@ -21,6 +23,7 @@ class _PracticeMainState extends State<PracticeMain> {
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   PageController _pageController;
+  final ams = AdMobService();
 
   @override
   void initState() {
@@ -36,6 +39,8 @@ class _PracticeMainState extends State<PracticeMain> {
     });
     _pageController = new PageController()
       ..addListener(_pageControllerListener);
+    Admob.initialize(ams.getAdMobAppId());
+    
   }
 
   _pageControllerListener() {
@@ -129,9 +134,10 @@ class _PracticeMainState extends State<PracticeMain> {
       body: Column(children: [
         ConnectionStatus(),
         Container(
-          height: MediaQuery.of(context).size.height * 0.10,
-          width: MediaQuery.of(context).size.width * 0.95,
-          color: Colors.indigo[50],
+          height: MediaQuery.of(context).size.height * 0.06,
+          // width: MediaQuery.of(context).size.width * 0.95,
+          // color: Colors.indigo[50],
+          child: AdmobBanner(adUnitId: ams.getBannerAdId(), adSize: AdmobBannerSize.SMART_BANNER),
         ),
         Expanded(
           child: products.length == 0

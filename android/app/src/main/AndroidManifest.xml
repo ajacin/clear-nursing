@@ -9,6 +9,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Clear Nursing"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-5554777087959184~7552703769"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
