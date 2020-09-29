@@ -167,17 +167,12 @@ class _SplashPageState extends State<SplashPage> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-              Icon(
-                Icons.local_hospital,
-                color: Theme.of(context).highlightColor,
-                size: 55,
-              ),
               Text(
                 "Clear Nursing",
-                style: GoogleFonts.megrim(
+                style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                       color: Theme.of(context).accentColor,
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       letterSpacing: .5),
                 ),

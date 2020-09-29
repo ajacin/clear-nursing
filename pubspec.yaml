@@ -30,7 +30,7 @@ dependencies:
   awesome_loader:
   http:
   cloud_firestore:
-  flutter_launcher_icons:
+  flutter_launcher_icons: "^0.8.0"
   share:
   font_awesome_flutter:
   mobx:
@@ -46,10 +46,10 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   mobx_codegen:
-  flutter_native_splash:
+  flutter_native_splash: ^0.1.9
 
 flutter_icons:
-  image_path: "assets/ic_launcher.png"
+  image_path: "assets/clear-nursing-logo.png"
   android: true
   ios: true
 
@@ -59,7 +59,9 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter_native_splash:
+  image: assets/clear-nursing-logo.png
   color: "FFFFFF"
+  fill: true
 
 flutter:
 
@@ -72,8 +74,9 @@ flutter:
   assets:
    - assets/google.png
    - assets/play.png
-   - assets/nursesdocs.png
+   - assets/nurses.png
    - assets/ic_launcher.png
+   - assets/clear-nursing-logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -123,11 +123,11 @@ class _LoginPageState extends State<LoginPage> {
             ConnectionStatus(),
             SizedBox(height: 150),
             Container(
-              height: 500,
-              width: 500,
+              height: 400,
+              width: 400,
               child: Image(
                 image: AssetImage(
-                  'assets/nursesdocs.png',
+                  'assets/nurses.png',
                 ),
                 fit: BoxFit.cover,
               ),

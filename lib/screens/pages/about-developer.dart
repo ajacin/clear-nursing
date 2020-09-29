@@ -23,7 +23,7 @@ class AboutDeveloper extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
-                  "Clear-Nursing application provides access to a handful of carefully picked questions to brush up your knowledge in the nursing subjects. A no-nonsense approach is the primary focus of the development. You, as a user, can focus on the questions. Your feedbacks are important for us to provide more quality contents."),
+                  "Clear-Nursing application provides access to a handful of carefully picked questions to brush up your knowledge in the nursing subjects. A no-nonsense approach is the primary focus of development. You, as a user, can focus on the questions. Your feedbacks are important for us to provide more quality contents."),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),

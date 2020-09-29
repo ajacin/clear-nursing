@@ -40,19 +40,23 @@ class _HomePageState extends State<HomePage>
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         titleSpacing: 0.0,
-        leading: Icon(Icons.local_hospital,
-        color: Theme.of(context).highlightColor,
-        size: 35,),
-        title: Text(
-          widget.title,
-          style: GoogleFonts.megrim(
-            textStyle: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: .5),
-          ),
-        ),
+        // leading: Icon(Icons.local_hospital,
+        // color: Theme.of(context).highlightColor,
+        // size: 35,),
+        leading: Image.asset('assets/clear-nursing-logo.png',
+        width: 5,
+        height: 5,
+        fit: BoxFit.contain,),
+        // title: Text(
+        //   widget.title,
+        //   style: GoogleFonts.megrim(
+        //     textStyle: TextStyle(
+        //         color: Theme.of(context).accentColor,
+        //         fontSize: 20,
+        //         fontWeight: FontWeight.bold,
+        //         letterSpacing: .5),
+        //   ),
+        // ),
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
       ),

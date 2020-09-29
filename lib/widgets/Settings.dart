@@ -46,7 +46,7 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(height: 20.0),
                 ThemeInfo(),
                 ProfileCategoryInfo(),
-                PracticeRemiderPreference(),
+                // PracticeRemiderPreference(),
                 ListTile(
                   title: Text("Application Version"),
                   subtitle: FutureBuilder(
