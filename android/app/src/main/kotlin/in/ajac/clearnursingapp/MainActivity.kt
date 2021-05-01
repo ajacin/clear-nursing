@@ -1,4 +1,4 @@
-package `in`.ajac.clearnursing
+package `in`.ajac.clearnursingapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

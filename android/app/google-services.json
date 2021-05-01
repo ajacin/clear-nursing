@@ -8,26 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:527283893043:android:8ef531132dd9b52bbb8446",
+        "mobilesdk_app_id": "1:527283893043:android:ea1eb05d53dc35cdbb8446",
         "android_client_info": {
-          "package_name": "com.example.clearnursing"
+          "package_name": "in.ajac.clearnursing"
         }
       },
       "oauth_client": [
         {
-          "client_id": "527283893043-8kefpuek0vugqblbpiv9qktaalbeumf2.apps.googleusercontent.com",
+          "client_id": "527283893043-uq9hutaiku2avtj5pl0obvb6o828p678.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.clearnursing",
+            "package_name": "in.ajac.clearnursing",
             "certificate_hash": "3743310cfd05fc9568229ab66a195b6afcfa6c8e"
           }
         },
         {
-          "client_id": "527283893043-2sa3l813pvmcqg8dhmgimucl8vckck7p.apps.googleusercontent.com",
+          "client_id": "527283893043-v8uhme82fumktrg1vb96rbotcclb39lm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.clearnursing",
-            "certificate_hash": "ef582cc2999092ea44c7472f35dbd64537cffb90"
+            "package_name": "in.ajac.clearnursing",
+            "certificate_hash": "17e576c169b201c01febec679c5ced16b2b1c9a8"
           }
         },
         {
@@ -53,9 +53,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:527283893043:android:ea1eb05d53dc35cdbb8446",
+        "mobilesdk_app_id": "1:527283893043:android:d44d5b85894b6013bb8446",
         "android_client_info": {
-          "package_name": "in.ajac.clearnursing"
+          "package_name": "in.ajac.clearnursingapp"
         }
       },
       "oauth_client": [
